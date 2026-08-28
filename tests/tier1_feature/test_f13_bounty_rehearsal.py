@@ -59,3 +59,19 @@ def test_dry_run_issue_1_script_exits_zero():
     )
     assert proc.returncode == 0, proc.stderr or proc.stdout
     assert "DRY-RUN PASS" in proc.stdout
+
+
+def test_branch_diff_vs_master_is_non_empty():
+    import subprocess
+
+    root = Path(__file__).resolve().parents[2]
+    proc = subprocess.run(
+        ["git", "diff", "--stat", "master...HEAD"],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert proc.stdout.strip(), "expected non-empty diff vs master for bounty issue #1"
+    assert "contracts/rehearsal-vault" in proc.stdout
+    assert "app/main.py" in proc.stdout

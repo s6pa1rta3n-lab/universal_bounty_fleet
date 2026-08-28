@@ -1,4 +1,4 @@
-.PHONY: install test verify build-console dry-run
+.PHONY: install test verify build-console dry-run diff
 
 VENV := .venv
 PYTHON := $(VENV)/bin/python
@@ -23,5 +23,8 @@ build-console:
 
 dry-run: install
 	PYTHONPATH=. $(PYTHON) scripts/dry_run_issue_1.py
+
+diff:
+	@git diff --stat master...HEAD
 
 verify: test build-console dry-run
