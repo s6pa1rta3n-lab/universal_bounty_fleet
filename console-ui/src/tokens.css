@@ -1,0 +1,14 @@
+:root {
+  --bg: #0c0a09;
+  --surface: #1c1917;
+  --border: #292524;
+  --muted: #78716c;
+  --ink: #fafaf9;
+  --volt: #c0ff70;
+  --danger: #e11d2e;
+  --pending: #e8c36a;
+  --sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+}

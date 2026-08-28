@@ -36,7 +36,10 @@ app = FastAPI(
     version="1.0.0",
 )
 
-if CONSOLE_DIR.exists():
+_console_assets = CONSOLE_DIR / "assets"
+if _console_assets.exists():
+    app.mount("/console/assets", StaticFiles(directory=_console_assets), name="console-assets")
+elif CONSOLE_DIR.exists():
     app.mount("/console/assets", StaticFiles(directory=CONSOLE_DIR), name="console-assets")
 
 
