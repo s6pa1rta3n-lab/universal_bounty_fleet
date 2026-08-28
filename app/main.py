@@ -16,7 +16,13 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from app.config import get_settings
-from app.memory.bank import classify_cheat, get_memory_bank, seed_demo_bounty
+from app.memory.bank import (
+    bounty_id_for_issue,
+    bounty_id_for_pr,
+    classify_cheat,
+    get_memory_bank,
+    seed_demo_bounty,
+)
 from app.memory.registry import registry_payload
 from app.security.firestore_lock import get_lock_manager
 from app.security.hmac_validator import verify_github_signature
@@ -54,12 +60,17 @@ class WebhookResponse(BaseModel):
     details: Dict[str, Any] = Field(default_factory=dict, description="Execution and routing metadata")
 
 
+def _remote_github_enabled() -> bool:
+    """Fetch PR diffs from GitHub REST only outside the test harness."""
+    return get_settings().app_env != "test"
+
+
 def _persist_intake(details: Dict[str, Any], issue: Dict[str, Any]) -> None:
     """Write Intake decisions into the Memory Bank for the Fleet Console."""
     try:
         repo = details.get("repo") or "unknown/unknown"
         issue_number = details.get("issue_number") or 0
-        bounty_id = f"{repo}#{issue_number}"
+        bounty_id = bounty_id_for_issue(repo, issue_number)
         bank = get_memory_bank()
         bank.upsert(
             bounty_id,
@@ -94,7 +105,7 @@ def _persist_audit(details: Dict[str, Any], pr: Dict[str, Any]) -> None:
     try:
         repo = details.get("repo") or "unknown/unknown"
         pr_number = details.get("pr_number") or 0
-        bounty_id = f"{repo.replace('/', '-')}#{pr_number}"
+        bounty_id = bounty_id_for_pr(repo, pr)
         findings = details.get("audit_findings") or {}
         verdict = details.get("verdict") or "REQUEST_CHANGES"
         cheat = classify_cheat(findings)
@@ -237,12 +248,10 @@ async def route_issue_event(
         escrow_res = evaluate_escrow_funding(payload)
         is_funded = escrow_res.get("is_funded", False)
         if is_funded:
-            settings = get_settings()
-            if settings.github_token or settings.app_env != "test":
-                try:
-                    staked_res = execute_claim_staking(payload)
-                except Exception as stake_err:
-                    logger.debug("Could not stake intent: %s", stake_err)
+            try:
+                staked_res = execute_claim_staking(payload)
+            except Exception as stake_err:
+                logger.debug("Could not stake intent: %s", stake_err)
 
     details = {
         "repo": repo_full_name,
@@ -292,8 +301,7 @@ async def route_pull_request_event(
 
     # Obtain diff content
     diff_text = pr.get("mock_diff_content") or payload.get("diff_text") or ""
-    settings = get_settings()
-    if not diff_text and pr_number and settings.github_token and settings.app_env != "test":
+    if not diff_text and pr_number and _remote_github_enabled():
         try:
             repo_parts = repo_full_name.split("/")
             if len(repo_parts) >= 2:
@@ -310,29 +318,28 @@ async def route_pull_request_event(
     review_res = {}
     draft_converted = False
     if action in ("opened", "synchronize", "ready_for_review", "created", "reopened", "unknown"):
-        if settings.github_token or settings.app_env != "test":
-            try:
-                gh_client = get_github_client()
-                review_res = submit_pr_review(
-                    pr_payload=payload,
-                    verdict=verdict,
-                    findings=audit_res,
+        try:
+            gh_client = get_github_client()
+            review_res = submit_pr_review(
+                pr_payload=payload,
+                verdict=verdict,
+                findings=audit_res,
+                github_client=gh_client,
+            )
+            if verdict == "APPROVE" and is_draft:
+                node_id = pr.get("node_id")
+                repo_parts = repo_full_name.split("/")
+                owner = repo_parts[0] if len(repo_parts) > 1 else "unknown"
+                rname = repo_parts[1] if len(repo_parts) > 1 else repo_full_name
+                draft_converted = convert_draft_to_ready(
+                    node_id=node_id,
+                    owner=owner,
+                    repo=rname,
+                    pull_number=pr_number,
                     github_client=gh_client,
                 )
-                if verdict == "APPROVE" and is_draft:
-                    node_id = pr.get("node_id")
-                    repo_parts = repo_full_name.split("/")
-                    owner = repo_parts[0] if len(repo_parts) > 1 else "unknown"
-                    rname = repo_parts[1] if len(repo_parts) > 1 else repo_full_name
-                    draft_converted = convert_draft_to_ready(
-                        node_id=node_id,
-                        owner=owner,
-                        repo=rname,
-                        pull_number=pr_number,
-                        github_client=gh_client,
-                    )
-            except Exception as review_err:
-                logger.debug("Could not submit PR review / convert draft: %s", review_err)
+        except Exception as review_err:
+            logger.debug("Could not submit PR review / convert draft: %s", review_err)
 
     details = {
         "repo": repo_full_name,
@@ -393,15 +400,13 @@ async def route_comment_event(
         is_clean = findings.get("pillar1_crypto", True) and findings.get("pillar2_auth", True) and findings.get("pillar3_assertions", True)
         verdict = "APPROVE" if is_clean else "REQUEST_CHANGES"
 
-        settings = get_settings()
-        if settings.github_token or settings.app_env != "test":
-            try:
-                gh_client = get_github_client()
-                review_res = submit_pr_review(payload, verdict, findings, github_client=gh_client)
-                details["verdict"] = verdict
-                details["review_id"] = review_res.get("review_id") or review_res.get("id")
-            except Exception as exc:
-                logger.debug("Comment-triggered audit could not submit review: %s", exc)
+        try:
+            gh_client = get_github_client()
+            review_res = submit_pr_review(payload, verdict, findings, github_client=gh_client)
+            details["verdict"] = verdict
+            details["review_id"] = review_res.get("review_id") or review_res.get("id")
+        except Exception as exc:
+            logger.debug("Comment-triggered audit could not submit review: %s", exc)
 
     return details
 

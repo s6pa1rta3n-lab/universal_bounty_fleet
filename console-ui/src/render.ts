@@ -9,11 +9,11 @@ export function bannerCopy(bounty: Bounty | null): { title: string; cls: string;
   }
   const status = bounty.audit_status || "PENDING";
   if (status === "FAIL") {
-    const cheat = bounty.cheat_detected ? ` · ${bounty.cheat_detected}` : "";
+    const cheat = bounty.cheat_detected ? ` / ${bounty.cheat_detected}` : "";
     return {
-      title: "BLOCKED",
+      title: `BLOCKED — MERGE DENIED${cheat}`,
       cls: "BLOCKED",
-      sub: `Merge denied${cheat}. Auditor holds the gate until the cheat is gone.`,
+      sub: "Auditor holds the gate until the cheat is gone.",
     };
   }
   if (status === "PASS" && bounty.merge_allowed) {

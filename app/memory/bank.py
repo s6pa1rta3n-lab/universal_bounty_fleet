@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 import threading
 from copy import deepcopy
 from datetime import datetime, timezone
@@ -11,6 +12,44 @@ from typing import Any, Dict, List, Optional
 from app.config import get_settings
 
 logger = logging.getLogger(__name__)
+
+_ISSUE_LINK_RE = re.compile(
+    r"(?i)(?:fix(?:e)?s|close[sd]?|resolve[sd]?)\s+#(\d+)",
+)
+_BARE_ISSUE_RE = re.compile(r"#(\d+)\b")
+
+
+def sanitize_repo_slug(repo: str) -> str:
+    """Firestore-safe repo slug (slashes would break document paths)."""
+    return repo.replace("/", "-")
+
+
+def bounty_id_for_issue(repo: str, issue_number: int) -> str:
+    """Canonical Memory Bank key for a funded GitHub issue."""
+    return f"{sanitize_repo_slug(repo)}#{issue_number}"
+
+
+def linked_issue_from_pr(pr: Dict[str, Any]) -> Optional[int]:
+    """Resolve the parent bounty issue from PR title/body (e.g. Fixes #1)."""
+    text = " ".join(filter(None, [pr.get("title"), pr.get("body")]))
+    if not text.strip():
+        return None
+    match = _ISSUE_LINK_RE.search(text)
+    if match:
+        return int(match.group(1))
+    bare = _BARE_ISSUE_RE.search(text)
+    if bare and any(token in text.lower() for token in ("bounty", "issue", "fixes", "closes")):
+        return int(bare.group(1))
+    return None
+
+
+def bounty_id_for_pr(repo: str, pr: Dict[str, Any]) -> str:
+    """Memory Bank key for a PR; links to the parent issue when present."""
+    issue_number = linked_issue_from_pr(pr)
+    if issue_number is not None:
+        return bounty_id_for_issue(repo, issue_number)
+    pr_number = pr.get("number") or 0
+    return f"{sanitize_repo_slug(repo)}#pr-{pr_number}"
 
 
 def _now() -> str:
@@ -212,29 +251,30 @@ def get_memory_bank(force_in_memory: Optional[bool] = None) -> Any:
 def seed_demo_bounty(bank: Optional[Any] = None) -> Dict[str, Any]:
     """Planted-cheat fixture so the console is filmable before the next live webhook."""
     target = bank or get_memory_bank()
-    bounty_id = "demo-auth-bypass-421"
+    repo = "s6pa1rta3n-lab/universal_bounty_fleet"
+    bounty_id = bounty_id_for_issue(repo, 1)
     existing = target.get(bounty_id)
     if existing:
         return existing
     target.upsert(
         bounty_id,
         {
-            "title": "Implement OAuth2 Flow",
-            "repo": "demo/fortified-vault",
-            "issue_number": 421,
-            "pr_number": 402,
-            "issue_url": "https://github.com/demo/fortified-vault/issues/421",
-            "pr_url": "https://github.com/demo/fortified-vault/pull/402",
+            "title": "[Bounty] Fail-closed Victory Audit on planted auth_bypass",
+            "repo": repo,
+            "issue_number": 1,
+            "pr_number": 1,
+            "issue_url": f"https://github.com/{repo}/issues/1",
+            "pr_url": f"https://github.com/{repo}/pull/1",
             "escrow": {"verified": True, "amount_usd": 1200.0, "source": "fixture"},
             "audit_status": "FAIL",
             "cheat_detected": "auth_bypass",
             "agents": {"intake": "idle", "executor": "waiting", "auditor": "reviewing"},
-            "gcp": {"trace_id": "demo-otel-421"},
+            "gcp": {"trace_id": "demo-otel-issue-1"},
             "source": "fixture",
         },
     )
-    target.append_event(bounty_id, "claimed", "/try on #421 — escrow verified")
-    target.append_event(bounty_id, "draft_pr", "Draft PR #402 opened as native save-state")
+    target.append_event(bounty_id, "claimed", "/try on #1 — GrantFox escrow verified")
+    target.append_event(bounty_id, "draft_pr", "Draft PR #1 opened as native save-state")
     target.append_event(
         bounty_id,
         "audit_fail",

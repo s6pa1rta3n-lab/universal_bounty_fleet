@@ -349,6 +349,7 @@ def make_pr_payload(
     author: str = "universal-engineer",
     action: str = "opened",
     diff_content: str = "",
+    body: str = "",
 ) -> Dict[str, Any]:
     target_repo = repo or repo_name or "stellar-org/soroban-contracts"
     target_draft = is_draft if is_draft is not None else (draft if draft is not None else True)
@@ -362,6 +363,7 @@ def make_pr_payload(
             "id": 2000 + pr_number,
             "number": pr_number,
             "title": title,
+            "body": body,
             "state": "open",
             "draft": target_draft,
             "user": {"login": author},
@@ -399,6 +401,15 @@ def mock_firestore_client() -> MockFirestoreClient:
 @pytest.fixture
 def mock_github_client() -> MockGitHubAPIClient:
     return MockGitHubAPIClient()
+
+
+@pytest.fixture(autouse=True)
+def patch_github_client(mock_github_client: MockGitHubAPIClient, monkeypatch) -> None:
+    """Route webhook review/comment paths through the in-memory GitHub mock."""
+    monkeypatch.setattr(
+        "app.utils.github_client.get_github_client",
+        lambda *args, **kwargs: mock_github_client,
+    )
 
 
 @pytest.fixture
