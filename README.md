@@ -95,9 +95,15 @@ pytest tests/ -v
 
 # Run local development server
 uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+
+# Design the Fleet Console without a rebuild (proxies /api and /health to :8080)
+cd console-ui && npm install && npm run dev
+
+# Export the console into app/static/console for uvicorn / Cloud Run
+cd console-ui && npm run build
 ```
 
-Open the Fleet Console at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console). It polls `/api/bounties/latest` and `/api/registry` every 2s. Live GitHub webhooks write the Memory Bank; if none have landed yet, a planted-cheat fixture (`auth_bypass`, merge blocked) is shown so the screen is filmable.
+Open the Fleet Console at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console), or the Vite preview at [http://127.0.0.1:5173/console/](http://127.0.0.1:5173/console/). It polls `/health`, `/api/bounties/latest`, and `/api/registry` every 2s. Live GitHub webhooks write the Memory Bank; if none have landed yet, a planted-cheat fixture (`auth_bypass`, merge blocked) is shown so the screen is filmable. Cloud Run stays one service: the Dockerfile builds `console-ui` and copies the export into the Python image.
 
 ---
 

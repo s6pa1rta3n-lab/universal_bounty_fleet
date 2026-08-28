@@ -1,4 +1,12 @@
-# Dockerfile for The Universal Bounty Fleet - Cloud Run Gateway Service
+# Multi-stage: build the Fleet Console, then serve it from the existing FastAPI image.
+FROM node:22-slim AS console
+WORKDIR /build
+COPY console-ui/package.json console-ui/package-lock.json* ./console-ui/
+WORKDIR /build/console-ui
+RUN npm ci
+COPY console-ui/ .
+RUN npm run build
+
 FROM python:3.12-slim
 
 # Set environment variables
@@ -21,8 +29,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy application source
+# Copy application source, then overlay the Vite export
 COPY . .
+COPY --from=console /build/app/static/console /app/app/static/console
 
 # Expose Cloud Run port
 EXPOSE 8080
