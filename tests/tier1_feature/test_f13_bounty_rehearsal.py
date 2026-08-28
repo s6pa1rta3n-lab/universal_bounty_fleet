@@ -1,5 +1,6 @@
 """Executor rehearsal artifacts for bounty issue #1 (planted auth_bypass)."""
 
+import os
 from pathlib import Path
 
 from app.audit.murder_board import analyze_diff_security
@@ -35,3 +36,26 @@ def test_commit_2_clean_passes_all_pillars():
     findings = analyze_diff_security(_unified_diff(clean))
     assert findings["pillar2_auth"] is True
     assert findings["all_passed"] is True
+
+
+def test_dry_run_issue_1_script_exits_zero():
+    import subprocess
+    import sys
+
+    root = Path(__file__).resolve().parents[2]
+    proc = subprocess.run(
+        [sys.executable, str(root / "scripts" / "dry_run_issue_1.py")],
+        cwd=root,
+        env={
+            **dict(os.environ),
+            "APP_ENV": "test",
+            "USE_IN_MEMORY_FIRESTORE": "true",
+            "GITHUB_WEBHOOK_SECRET": "test-webhook-secret-12345",
+            "PYTHONPATH": str(root),
+        },
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert proc.returncode == 0, proc.stderr or proc.stdout
+    assert "DRY-RUN PASS" in proc.stdout
