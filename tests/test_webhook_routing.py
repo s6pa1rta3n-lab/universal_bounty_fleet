@@ -32,7 +32,8 @@ class TestWebhookRouting:
         assert data["service"] == "universal-bounty-gateway"
         assert data["status"] == "active"
         assert data["project"] == "odin-500008"
-        assert "Taskmaster" in str(data["tracks"])
+        assert data["track"] == "Fortified Enterprise Fleet"
+        assert data["console_url"] == "/console"
 
     def test_health_endpoints(self, test_client: TestClient):
         for path in ["/health", "/healthz"]:

@@ -1,8 +1,8 @@
 # The Universal Bounty Fleet
 
-> Autonomous, Stateless Multi-Agent Bounty Execution & High-Assurance Security Auditing Fleet
+> Autonomous multi-agent bounty execution with a fail-closed Victory Audit. Fortified Enterprise Fleet track.
 
-"The Universal Bounty Fleet" bridges the **Taskmaster** (Autonomous Bounty Discovery, Qualification & Intent Staking) and **Fortified Enterprise Fleet** (Adversarial Security Auditing & Native GitHub PR Reviews) hackathon tracks into a unified, Google Enterprise Agent Platform (GEAP) system.
+Cataloged agents (Intake, Executor, Auditor) claim funded GitHub issues, open a draft PR, and **cannot merge until a separate auditor passes**. The live camera is `/console` — not a chatbot.
 
 ---
 
@@ -96,6 +96,8 @@ pytest tests/ -v
 # Run local development server
 uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
 ```
+
+Open the Fleet Console at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console). It polls `/api/bounties/latest` and `/api/registry` every 2s. Live GitHub webhooks write the Memory Bank; if none have landed yet, a planted-cheat fixture (`auth_bypass`, merge blocked) is shown so the screen is filmable.
 
 ---
 

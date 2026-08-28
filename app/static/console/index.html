@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleet Console — Universal Bounty Fleet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0d0c;
+      --panel: #121614;
+      --line: #2a332c;
+      --ink: #d7e0d4;
+      --muted: #7d8a7a;
+      --pass: #7CFFB2;
+      --fail: #FF6B4A;
+      --pending: #E8C36A;
+      --intake: #7EB6FF;
+      --exec: #C9A227;
+      --audit: #E07A5F;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: "IBM Plex Sans", sans-serif; }
+    body { background-image: radial-gradient(ellipse at top, #162018 0%, #0b0d0c 55%); }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 28px; border-bottom: 1px solid var(--line);
+    }
+    .brand { font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .brand span { color: var(--pass); }
+    .meta { color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 12px; display: flex; gap: 16px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+    .dot.ok { background: var(--pass); box-shadow: 0 0 8px var(--pass); }
+    .dot.bad { background: var(--fail); }
+    .banner {
+      margin: 20px 28px 0; padding: 16px 20px; border: 1px solid var(--line);
+      font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: 0.14em;
+    }
+    .banner.FAIL, .banner.BLOCKED { color: var(--fail); border-color: #5a2a1e; background: #1a100e; }
+    .banner.PASS { color: var(--pass); border-color: #1e4a32; background: #0e1a14; }
+    .banner.PENDING { color: var(--pending); border-color: #4a3e1e; background: #17140c; }
+    .grid { display: grid; grid-template-columns: 1fr 1.2fr 0.9fr; gap: 16px; padding: 20px 28px 32px; }
+    @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+    .panel { background: var(--panel); border: 1px solid var(--line); padding: 18px; }
+    h2 { margin: 0 0 14px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    a { color: var(--pass); }
+    .kv { display: grid; grid-template-columns: 110px 1fr; gap: 8px 10px; font-size: 14px; }
+    .kv b { color: var(--muted); font-weight: 500; font-family: "IBM Plex Mono", monospace; font-size: 12px; }
+    .event { border-left: 2px solid var(--line); padding: 0 0 14px 14px; font-size: 14px; }
+    .event:last-child { padding-bottom: 0; }
+    .event .t { color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+    .event.audit_fail { border-color: var(--fail); }
+    .event.audit_pass, .event.claimed { border-color: var(--pass); }
+    .event.draft_pr { border-color: var(--exec); }
+    .agent { border: 1px solid var(--line); padding: 12px; margin-bottom: 10px; }
+    .agent strong { display: block; font-size: 14px; }
+    .agent .id { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--muted); }
+    .scope { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--ink); margin-top: 6px; }
+    footer { padding: 0 28px 24px; color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+    .empty { color: var(--muted); font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Universal Bounty Fleet / <span>Console</span></div>
+    <div class="meta">
+      <div><span id="health-dot" class="dot bad"></span><span id="health-label">gateway offline</span></div>
+      <div id="poll">poll 2s</div>
+      <div id="clock"></div>
+    </div>
+  </header>
+  <div id="banner" class="banner PENDING">PENDING — WAITING FOR FLEET STATE</div>
+  <main class="grid">
+    <section class="panel">
+      <h2>Current bounty</h2>
+      <div id="bounty" class="empty">No live bounty yet. Waiting on /try or demo fixture.</div>
+    </section>
+    <section class="panel">
+      <h2>Trace</h2>
+      <div id="timeline" class="empty">Events appear as Intake, Executor, and Auditor write GitHub state.</div>
+    </section>
+    <section class="panel">
+      <h2>Registry</h2>
+      <div id="registry"></div>
+    </section>
+  </main>
+  <footer id="gcp"></footer>
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function bannerClass(status, mergeAllowed) {
+      if (status === "FAIL" || mergeAllowed === false && status === "FAIL") return "FAIL";
+      if (status === "PASS" && mergeAllowed) return "PASS";
+      return status || "PENDING";
+    }
+
+    function bannerText(bounty) {
+      const status = bounty.audit_status || "PENDING";
+      if (status === "FAIL") {
+        return `BLOCKED — MERGE DENIED` + (bounty.cheat_detected ? ` / ${bounty.cheat_detected}` : "");
+      }
+      if (status === "PASS" && bounty.merge_allowed) return "PASS — AUDITOR CLEARED MERGE";
+      return "PENDING — FLEET IN FLIGHT";
+    }
+
+    function renderBounty(b) {
+      if (!b) {
+        $("bounty").innerHTML = `<div class="empty">No bounty in Memory Bank.</div>`;
+        return;
+      }
+      const escrow = b.escrow || {};
+      $("bounty").innerHTML = `
+        <div class="kv">
+          <b>id</b><div>${b.bounty_id || "—"}</div>
+          <b>title</b><div>${b.title || "—"}</div>
+          <b>issue</b><div>${b.issue_url ? `<a href="${b.issue_url}" target="_blank">${b.issue_url}</a>` : "—"}</div>
+          <b>draft pr</b><div>${b.pr_url ? `<a href="${b.pr_url}" target="_blank">${b.pr_url}</a>` : "—"}</div>
+          <b>escrow</b><div>${escrow.verified ? `verified $${escrow.amount_usd || 0} (${escrow.source || "unknown"})` : "not verified"}</div>
+          <b>cheat</b><div>${b.cheat_detected || "none"}</div>
+          <b>merge</b><div>${b.merge_allowed ? "allowed" : "blocked"}</div>
+          <b>source</b><div>${b.source || "live"}</div>
+        </div>`;
+    }
+
+    function renderTimeline(events) {
+      if (!events || !events.length) {
+        $("timeline").innerHTML = `<div class="empty">No events yet.</div>`;
+        return;
+      }
+      $("timeline").innerHTML = events.map((e) => `
+        <div class="event ${e.type || ""}">
+          <div class="t">${(e.t || "").replace("T", " ").replace("Z", " UTC")} · ${e.type}</div>
+          <div>${e.detail || ""}</div>
+        </div>`).join("");
+    }
+
+    function renderRegistry(agents, live) {
+      const statusOf = (id) => (live && live.agents && live.agents[id]) || (agents.find(a => a.id === id) || {}).status || "idle";
+      $("registry").innerHTML = agents.map((a) => `
+        <div class="agent">
+          <strong>${a.name}</strong>
+          <div class="id">${a.id} v${a.version} · ${a.identity} · ${statusOf(a.id)}</div>
+          <div class="scope">${(a.tool_scope || []).join(" · ")}</div>
+        </div>`).join("");
+    }
+
+    async function tick() {
+      $("clock").textContent = new Date().toISOString().slice(11, 19) + "Z";
+      try {
+        const [health, registry, latest] = await Promise.all([
+          fetch("/health").then((r) => r.json()),
+          fetch("/api/registry").then((r) => r.json()),
+          fetch("/api/bounties/latest").then((r) => r.json()),
+        ]);
+        $("health-dot").className = "dot ok";
+        $("health-label").textContent = health.service || "gateway healthy";
+        const bounty = latest.bounty || null;
+        const status = bounty ? bannerClass(bounty.audit_status, bounty.merge_allowed) : "PENDING";
+        $("banner").className = "banner " + status;
+        $("banner").textContent = bounty ? bannerText(bounty) : "PENDING — WAITING FOR FLEET STATE";
+        renderBounty(bounty);
+        renderTimeline(bounty && bounty.events);
+        renderRegistry(registry.agents || [], bounty);
+        const gcp = (bounty && bounty.gcp) || {};
+        $("gcp").textContent = [
+          gcp.project && `gcp ${gcp.project}`,
+          gcp.region,
+          gcp.firestore_doc,
+          gcp.trace_id && `trace ${gcp.trace_id}`,
+        ].filter(Boolean).join("  ·  ");
+      } catch (err) {
+        $("health-dot").className = "dot bad";
+        $("health-label").textContent = "gateway unreachable";
+      }
+    }
+    tick();
+    setInterval(tick, 2000);
+  </script>
+</body>
+</html>

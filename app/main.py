@@ -8,12 +8,16 @@ and routing to Intake Taskmaster and Victory Audit Fleet subagents.
 import json
 import logging
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, Optional
 from fastapi import FastAPI, Header, HTTPException, Request, Response, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from app.config import get_settings
+from app.memory.bank import classify_cheat, get_memory_bank, seed_demo_bounty
+from app.memory.registry import registry_payload
 from app.security.firestore_lock import get_lock_manager
 from app.security.hmac_validator import verify_github_signature
 
@@ -24,11 +28,16 @@ logging.basicConfig(
 )
 logger = logging.getLogger("universal_bounty_fleet")
 
+CONSOLE_DIR = Path(__file__).parent / "static" / "console"
+
 app = FastAPI(
     title="The Universal Bounty Fleet - Gateway",
     description="Stateless Webhook Gateway & GEAP Multi-Agent Orchestrator",
     version="1.0.0",
 )
+
+if CONSOLE_DIR.exists():
+    app.mount("/console/assets", StaticFiles(directory=CONSOLE_DIR), name="console-assets")
 
 
 class WebhookResponse(BaseModel):
@@ -42,6 +51,83 @@ class WebhookResponse(BaseModel):
     details: Dict[str, Any] = Field(default_factory=dict, description="Execution and routing metadata")
 
 
+def _persist_intake(details: Dict[str, Any], issue: Dict[str, Any]) -> None:
+    """Write Intake decisions into the Memory Bank for the Fleet Console."""
+    try:
+        repo = details.get("repo") or "unknown/unknown"
+        issue_number = details.get("issue_number") or 0
+        bounty_id = f"{repo}#{issue_number}"
+        bank = get_memory_bank()
+        bank.upsert(
+            bounty_id,
+            {
+                "title": details.get("title") or issue.get("title"),
+                "repo": repo,
+                "issue_number": issue_number,
+                "issue_url": issue.get("html_url"),
+                "escrow": {
+                    "verified": bool(details.get("is_funded")),
+                    "amount_usd": details.get("escrow_amount") or 0.0,
+                    "source": "intake",
+                },
+                "audit_status": "PENDING",
+                "agents": {"intake": "working" if details.get("staked") else "idle"},
+                "source": "live",
+                "gcp": {"trace_id": details.get("comment_id") and f"intake-{details.get('comment_id')}"},
+            },
+        )
+        if details.get("staked"):
+            bank.append_event(bounty_id, "claimed", f"/try on #{issue_number}")
+        elif details.get("qualified"):
+            bank.append_event(bounty_id, "qualified", details.get("qualification_reason") or "qualified")
+        else:
+            bank.append_event(bounty_id, "rejected", details.get("qualification_reason") or "not qualified")
+    except Exception as exc:
+        logger.debug("Memory Bank intake persist skipped: %s", exc)
+
+
+def _persist_audit(details: Dict[str, Any], pr: Dict[str, Any]) -> None:
+    """Write Auditor verdicts into the Memory Bank. Merge stays blocked unless PASS."""
+    try:
+        repo = details.get("repo") or "unknown/unknown"
+        pr_number = details.get("pr_number") or 0
+        bounty_id = f"{repo}#{pr_number}"
+        findings = details.get("audit_findings") or {}
+        verdict = details.get("verdict") or "REQUEST_CHANGES"
+        cheat = classify_cheat(findings)
+        passed = verdict == "APPROVE"
+        bank = get_memory_bank()
+        bank.upsert(
+            bounty_id,
+            {
+                "title": pr.get("title"),
+                "repo": repo,
+                "pr_number": pr_number,
+                "pr_url": pr.get("html_url"),
+                "audit_status": "PASS" if passed else "FAIL",
+                "cheat_detected": None if passed else cheat,
+                "agents": {
+                    "executor": "idle" if passed else "waiting",
+                    "auditor": "reviewing" if not passed else "idle",
+                },
+                "source": "live",
+                "gcp": {"trace_id": details.get("review_id") and f"audit-{details.get('review_id')}"},
+            },
+        )
+        if details.get("is_draft"):
+            bank.append_event(bounty_id, "draft_pr", f"Draft PR #{pr_number} observed")
+        if passed:
+            bank.append_event(bounty_id, "audit_pass", findings.get("summary") or "Victory Audit passed")
+        else:
+            bank.append_event(
+                bounty_id,
+                "audit_fail",
+                findings.get("summary") or f"REQUEST_CHANGES ({cheat or 'policy'})",
+            )
+    except Exception as exc:
+        logger.debug("Memory Bank audit persist skipped: %s", exc)
+
+
 @app.get("/", tags=["System"])
 async def root() -> Dict[str, Any]:
     """Root metadata endpoint."""
@@ -53,9 +139,50 @@ async def root() -> Dict[str, Any]:
         "status": "active",
         "project": settings.gcp_project,
         "region": settings.gcp_region,
-        "tracks": ["Taskmaster (Intake & Staking)", "Fortified Enterprise Fleet (Victory Audit)"],
+        "track": "Fortified Enterprise Fleet",
+        "console_url": "/console",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
+
+
+@app.get("/console", tags=["Console"])
+@app.get("/console/", tags=["Console"])
+async def fleet_console() -> FileResponse:
+    """Serve the Fleet Console used for the live judging demo."""
+    index = CONSOLE_DIR / "index.html"
+    if not index.exists():
+        raise HTTPException(status_code=404, detail="Fleet Console is not packaged")
+    return FileResponse(index)
+
+
+@app.get("/api/registry", tags=["Console"])
+async def api_registry() -> Dict[str, Any]:
+    return registry_payload()
+
+
+@app.get("/api/bounties/latest", tags=["Console"])
+async def api_latest_bounty() -> Dict[str, Any]:
+    bank = get_memory_bank()
+    bounty = bank.latest()
+    if bounty is None:
+        bounty = seed_demo_bounty(bank)
+    return {"bounty": bounty}
+
+
+@app.get("/api/bounties", tags=["Console"])
+async def api_list_bounties() -> Dict[str, Any]:
+    bank = get_memory_bank()
+    if not bank.list_all():
+        seed_demo_bounty(bank)
+    return {"bounties": bank.list_all()}
+
+
+@app.get("/api/bounties/{bounty_id}", tags=["Console"])
+async def api_get_bounty(bounty_id: str) -> Dict[str, Any]:
+    bounty = get_memory_bank().get(bounty_id)
+    if not bounty:
+        raise HTTPException(status_code=404, detail=f"Unknown bounty {bounty_id}")
+    return bounty
 
 
 @app.get("/health", tags=["System"])
@@ -114,7 +241,7 @@ async def route_issue_event(
                 except Exception as stake_err:
                     logger.debug("Could not stake intent: %s", stake_err)
 
-    return {
+    details = {
         "repo": repo_full_name,
         "issue_number": issue_number,
         "action": action,
@@ -129,6 +256,8 @@ async def route_issue_event(
         "staked": staked_res.get("success", False),
         "comment_id": staked_res.get("comment_id"),
     }
+    _persist_intake(details, issue)
+    return details
 
 
 async def route_pull_request_event(
@@ -202,7 +331,7 @@ async def route_pull_request_event(
             except Exception as review_err:
                 logger.debug("Could not submit PR review / convert draft: %s", review_err)
 
-    return {
+    details = {
         "repo": repo_full_name,
         "pr_number": pr_number,
         "action": action,
@@ -216,6 +345,8 @@ async def route_pull_request_event(
         "review_id": review_res.get("review_id") or review_res.get("id"),
         "draft_converted": draft_converted,
     }
+    _persist_audit(details, pr)
+    return details
 
 
 async def route_comment_event(

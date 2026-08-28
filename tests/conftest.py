@@ -22,6 +22,7 @@ os.environ["USE_IN_MEMORY_FIRESTORE"] = "true"
 
 from app.config import Settings, get_settings
 from app.main import app
+from app.memory.bank import get_memory_bank
 from app.security.firestore_lock import InMemoryFirestoreLock, get_lock_manager
 from app.security.hmac_validator import generate_github_signature
 
@@ -387,6 +388,7 @@ def make_pr_payload(
 def reset_lock_manager() -> None:
     lock_mgr = get_lock_manager(force_in_memory=True)
     lock_mgr.clear()
+    get_memory_bank(force_in_memory=True).clear()
 
 
 @pytest.fixture
