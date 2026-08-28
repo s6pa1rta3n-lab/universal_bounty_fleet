@@ -91,7 +91,7 @@ def _persist_audit(details: Dict[str, Any], pr: Dict[str, Any]) -> None:
     try:
         repo = details.get("repo") or "unknown/unknown"
         pr_number = details.get("pr_number") or 0
-        bounty_id = f"{repo}#{pr_number}"
+        bounty_id = f"{repo.replace('/', '-')}#{pr_number}"
         findings = details.get("audit_findings") or {}
         verdict = details.get("verdict") or "REQUEST_CHANGES"
         cheat = classify_cheat(findings)
