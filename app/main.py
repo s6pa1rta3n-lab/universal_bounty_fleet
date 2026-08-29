@@ -20,6 +20,7 @@ from app.memory.bank import (
     bounty_id_for_issue,
     bounty_id_for_pr,
     classify_cheat,
+    console_banner_copy,
     get_memory_bank,
     seed_demo_bounty,
 )
@@ -180,7 +181,7 @@ async def api_latest_bounty() -> Dict[str, Any]:
     bounty = bank.latest()
     if bounty is None:
         bounty = seed_demo_bounty(bank)
-    return {"bounty": bounty}
+    return {"bounty": bounty, "banner": console_banner_copy(bounty)}
 
 
 @app.get("/api/bounties", tags=["Console"])

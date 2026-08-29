@@ -13,6 +13,7 @@ from typing import Any, Dict, List, Literal, Optional
 from pydantic import BaseModel, Field
 
 from app.audit.murder_board import analyze_diff_security
+from app.config import get_settings
 from app.utils.vertex_client import VertexClientFactory, get_vertex_client
 
 logger = logging.getLogger(__name__)
@@ -114,7 +115,7 @@ class GeminiCodeAuditor:
 
         try:
             client = self.vertex_client
-            if client is None:
+            if client is None and get_settings().app_env != "test":
                 try:
                     client = get_vertex_client()
                 except Exception as exc:

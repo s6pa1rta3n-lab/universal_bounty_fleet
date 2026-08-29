@@ -19,7 +19,11 @@ os.environ.setdefault("GITHUB_WEBHOOK_SECRET", "test-webhook-secret-12345")
 from fastapi.testclient import TestClient  # noqa: E402
 
 from app.main import app  # noqa: E402
-from app.memory.bank import bounty_id_for_issue, get_memory_bank  # noqa: E402
+from app.memory.bank import (  # noqa: E402
+    RECORDING_CUE_BANNER,
+    bounty_id_for_issue,
+    get_memory_bank,
+)
 from app.utils import github_client as github_client_module  # noqa: E402
 from tests.conftest import (  # noqa: E402
     AUTH_BYPASS_SOROBAN_DIFF,
@@ -91,7 +95,10 @@ def main() -> int:
         f"   verdict=REQUEST_CHANGES audit_status={blocked['audit_status']} "
         f"cheat={blocked['cheat_detected']} merge_allowed={blocked['merge_allowed']}"
     )
-    print("   console banner: BLOCKED — MERGE DENIED / auth_bypass")
+    latest_resp = client.get("/api/bounties/latest").json()
+    banner = latest_resp["banner"]
+    assert banner["title"] == RECORDING_CUE_BANNER, banner
+    print(f"   console banner: {banner['title']}")
 
     print("3) Fix commit — bypass removed")
     fix = make_pr_payload(

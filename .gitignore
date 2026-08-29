@@ -1,4 +1,5 @@
 .agents/
+.agent-nio/
 .venv/
 .env
 __pycache__/

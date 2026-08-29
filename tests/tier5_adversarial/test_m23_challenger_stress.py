@@ -340,7 +340,7 @@ class TestVictoryAuditReviewFlow:
 @@ -1,3 +1,4 @@
 +// caller.require_auth();
 """
-        auditor = GeminiCodeAuditor()
+        auditor = GeminiCodeAuditor(vertex_client=MockVertexAIClient())
         result = auditor.audit_diff(violating_diff)
         assert not result.passed
         assert result.verdict == "REQUEST_CHANGES"

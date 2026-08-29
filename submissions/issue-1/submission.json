@@ -1,0 +1,31 @@
+{
+  "issue": {
+    "repo": "s6pa1rta3n-lab/universal_bounty_fleet",
+    "number": 1,
+    "url": "https://github.com/s6pa1rta3n-lab/universal_bounty_fleet/issues/1",
+    "title": "[Bounty] Fail-closed Victory Audit on planted auth_bypass"
+  },
+  "reward_usd": 1200.0,
+  "currency": "USDC",
+  "platform": "GrantFox",
+  "fixes_issue": 1,
+  "draft_pr_title": "[Bounty] planted auth_bypass — Fixes #1",
+  "cheat_type": "auth_bypass",
+  "recording_cue_banner": "BLOCKED — MERGE DENIED / auth_bypass",
+  "verify": {
+    "command": "make verify",
+    "wrapper": "submissions/issue-1/verify.sh"
+  },
+  "api": {
+    "latest_bounty": "/api/bounties/latest",
+    "banner_field": "banner.title"
+  },
+  "executor_artifacts": {
+    "commit_1_planted": "contracts/rehearsal-vault/src/lib.rs",
+    "commit_2_clean": "fixtures/bounty-rehearsal/issue-1/commit-2-clean.rs",
+    "dry_run": "scripts/dry_run_issue_1.py",
+    "export_diffs": "scripts/export_rehearsal_diffs.sh"
+  },
+  "live_loop_required": true,
+  "operator_doc": "REHEARSAL_OPERATOR.md"
+}

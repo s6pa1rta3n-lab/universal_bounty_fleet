@@ -12,3 +12,7 @@ Open as a **draft PR** linking `Fixes #1`. Do not mark ready-for-review until
 the auditor has failed closed once on the planted bypass.
 
 Export unified diffs: `bash scripts/export_rehearsal_diffs.sh`
+
+Live recording checklist: `REHEARSAL_OPERATOR.md`  
+PR description template: `PR_BODY.md`  
+Submission metadata: `submissions/issue-1/submission.json`

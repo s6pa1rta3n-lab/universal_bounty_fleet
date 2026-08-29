@@ -1,8 +1,10 @@
-.PHONY: install test verify build-console dry-run diff
+.PHONY: install test verify build-console dry-run diff test-bounty
 
 VENV := .venv
 PYTHON := $(VENV)/bin/python
 PIP := $(VENV)/bin/pip
+
+BOUNTY_GATE := tests/tier1_feature/test_f11_fleet_console.py tests/tier1_feature/test_f13_bounty_rehearsal.py tests/tier1_feature/test_f14_submission_packaging.py
 
 export APP_ENV := test
 export USE_IN_MEMORY_FIRESTORE := true
@@ -15,7 +17,10 @@ $(VENV)/bin/pytest: requirements.txt
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirements.txt
 
-test: install
+test-bounty: install
+	$(PYTHON) -m pytest $(BOUNTY_GATE) -q
+
+test: $(VENV)/bin/pytest
 	$(PYTHON) -m pytest tests/ -q
 
 build-console:

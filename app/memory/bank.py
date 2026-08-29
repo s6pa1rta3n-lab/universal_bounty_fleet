@@ -101,6 +101,35 @@ def classify_cheat(findings: Optional[Dict[str, Any]]) -> Optional[str]:
     return None
 
 
+RECORDING_CUE_BANNER = "BLOCKED — MERGE DENIED / auth_bypass"
+
+
+def console_banner_copy(bounty: Optional[Dict[str, Any]]) -> Dict[str, str]:
+    """Mirror console-ui/src/render.ts bannerCopy for API→console parity."""
+    if not bounty:
+        return {"title": "PENDING", "cls": "PENDING", "sub": "Waiting for fleet state."}
+    status = bounty.get("audit_status") or "PENDING"
+    if status == "FAIL":
+        cheat = bounty.get("cheat_detected")
+        cheat_suffix = f" / {cheat}" if cheat else ""
+        return {
+            "title": f"BLOCKED — MERGE DENIED{cheat_suffix}",
+            "cls": "BLOCKED",
+            "sub": "Auditor holds the gate until the cheat is gone.",
+        }
+    if status == "PASS" and bounty.get("merge_allowed"):
+        return {
+            "title": "CLEARED",
+            "cls": "CLEARED",
+            "sub": "Auditor approved. Merge is allowed.",
+        }
+    return {
+        "title": "PENDING",
+        "cls": "PENDING",
+        "sub": "Fleet in flight. Waiting for the next GitHub state change.",
+    }
+
+
 class InMemoryBank:
     """Thread-safe local Memory Bank used in tests and offline demos."""
 

@@ -6,8 +6,10 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.memory.bank import (
+    RECORDING_CUE_BANNER,
     bounty_id_for_issue,
     classify_cheat,
+    console_banner_copy,
     get_memory_bank,
     seed_demo_bounty,
 )
@@ -42,6 +44,10 @@ def test_console_bundle_exposes_blocked_banner_copy():
     assert js_files, "Fleet Console bundle missing"
     bundle = js_files[0].read_text(encoding="utf-8")
     assert "BLOCKED — MERGE DENIED" in bundle
+    render_ts = (
+        Path(__file__).resolve().parents[2] / "console-ui" / "src" / "render.ts"
+    ).read_text(encoding="utf-8")
+    assert "auth_bypass" in render_ts or "cheat_detected" in render_ts
 
 
 def test_registry_lists_three_scoped_agents(test_client: TestClient):
@@ -57,16 +63,57 @@ def test_registry_lists_three_scoped_agents(test_client: TestClient):
     assert "contents:write" not in auditor["tool_scope"]
 
 
+def test_webhook_fail_exposes_recording_cue_banner_on_latest_api(
+    test_client: TestClient, mock_github_client,
+):
+    """QA: after webhook FAIL, /api/bounties/latest drives the console recording cue."""
+    bank = get_memory_bank(force_in_memory=True)
+    bank.clear()
+
+    issue_payload = make_issue_payload(
+        repo_name=BOUNTY_REPO,
+        issue_number=1,
+        title="[Bounty] Fail-closed Victory Audit on planted auth_bypass",
+        body="Reward: $1,200 USDC on GrantFox. Escrow confirmed by grantfox-bot.",
+        comments=[{"id": 8001, "body": "GrantFox escrow locked."}],
+    )
+    _post_webhook(test_client, "issues", issue_payload, "banner-intake-1")
+
+    bypass_payload = make_pr_payload(
+        repo_name=BOUNTY_REPO,
+        pr_number=1,
+        title="[Bounty] planted auth_bypass — Fixes #1",
+        body="Planted cheat for recording cue.",
+        diff_content=AUTH_BYPASS_SOROBAN_DIFF,
+    )
+    bypass_payload["pull_request"]["mock_diff_content"] = AUTH_BYPASS_SOROBAN_DIFF
+    bypass_payload["diff_text"] = AUTH_BYPASS_SOROBAN_DIFF
+    fail_resp = _post_webhook(test_client, "pull_request", bypass_payload, "banner-pr-fail-1")
+    assert fail_resp.status_code == 200
+    assert fail_resp.json()["details"]["verdict"] == "REQUEST_CHANGES"
+
+    latest_resp = test_client.get("/api/bounties/latest").json()
+    latest = latest_resp["bounty"]
+    assert latest["bounty_id"] == BOUNTY_ISSUE_ID
+    assert latest["audit_status"] == "FAIL"
+    assert latest["cheat_detected"] == "auth_bypass"
+    assert latest["merge_allowed"] is False
+    assert latest_resp["banner"]["title"] == RECORDING_CUE_BANNER
+    assert latest_resp["banner"]["cls"] == "BLOCKED"
+
+
 def test_latest_seeds_fixture_and_blocks_merge(test_client: TestClient):
     resp = test_client.get("/api/bounties/latest")
     assert resp.status_code == 200
-    bounty = resp.json()["bounty"]
+    payload = resp.json()
+    bounty = payload["bounty"]
     assert bounty["source"] == "fixture"
     assert bounty["bounty_id"] == BOUNTY_ISSUE_ID
     assert bounty["issue_number"] == 1
     assert bounty["audit_status"] == "FAIL"
     assert bounty["merge_allowed"] is False
     assert bounty["cheat_detected"] == "auth_bypass"
+    assert payload["banner"]["title"] == RECORDING_CUE_BANNER
 
 
 def test_merge_allowed_only_when_audit_passes():
