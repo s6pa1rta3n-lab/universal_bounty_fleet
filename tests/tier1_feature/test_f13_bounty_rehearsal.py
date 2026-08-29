@@ -24,6 +24,24 @@ def _unified_diff(path: Path) -> str:
     )
 
 
+def test_gemini_auditor_skips_live_vertex_client_in_test_env(monkeypatch):
+    """Regression: m23 must not spin on ADC when APP_ENV=test (harness timeout at ~97%)."""
+    from app.audit.gemini_auditor import GeminiCodeAuditor
+
+    called: list[bool] = []
+
+    def _forbidden(*args, **kwargs):
+        called.append(True)
+        raise AssertionError("get_vertex_client must not run under APP_ENV=test")
+
+    monkeypatch.setattr("app.audit.gemini_auditor.get_vertex_client", _forbidden)
+    auditor = GeminiCodeAuditor()
+    result = auditor.audit_diff("+// recipient.require_auth(); // Auth check bypassed\n")
+    assert called == []
+    assert result.verdict == "REQUEST_CHANGES"
+    assert result.pillar_breakdown["pillar2_auth"] is False
+
+
 def test_commit_1_planted_bypass_fails_pillar2():
     findings = analyze_diff_security(_unified_diff(PLANTED_CONTRACT))
     assert findings["pillar2_auth"] is False

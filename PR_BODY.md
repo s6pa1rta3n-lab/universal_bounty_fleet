@@ -25,6 +25,9 @@ make verify
 bash submissions/issue-1/verify.sh
 ```
 
+`make test` completes in ~25s (294 tests). Prior harness `Terminated` at ~97% was caused by
+`GeminiCodeAuditor()` without a mock hitting live Vertex ADC (~40s); fixed in commit `9b63ac4`.
+
 Dry-run prints the recording sequence without GitHub or Cloud Run:
 
 ```bash
