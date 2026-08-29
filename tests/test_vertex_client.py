@@ -32,10 +32,16 @@ class TestVertexClientFactory:
         assert factory.location == "europe-west1"
         assert factory.quota_project_id == "quota-project"
 
-    def test_get_vertex_client_singleton(self):
+    def test_get_vertex_client_singleton(self, monkeypatch):
+        sentinel = VertexClientFactory(project_id="singleton-test")
+        monkeypatch.setattr(
+            "app.utils.vertex_client._vertex_factory_instance",
+            sentinel,
+        )
         v1 = get_vertex_client()
         v2 = get_vertex_client()
         assert v1 is v2
+        assert v1 is sentinel
 
     def test_generate_structured_parsing(self):
         factory = VertexClientFactory()

@@ -79,6 +79,30 @@ def test_dry_run_issue_1_script_exits_zero():
     assert "DRY-RUN PASS" in proc.stdout
 
 
+def test_makefile_test_recipe_avoids_install_dependency():
+    """Regression: harness runs `make test`; it must not re-run pip install each time."""
+    makefile = Path(__file__).resolve().parents[2] / "Makefile"
+    lines = makefile.read_text(encoding="utf-8").splitlines()
+    test_line = next(line for line in lines if line.startswith("test:"))
+    assert "install" not in test_line
+    assert "$(VENV)/bin/pytest" in test_line
+
+
+def test_m23_auditor_instantiation_uses_mock_vertex_client():
+    """Regression: late-suite m23 test must not call GeminiCodeAuditor() without a mock."""
+    m23 = (
+        Path(__file__).resolve().parents[2]
+        / "tests"
+        / "tier5_adversarial"
+        / "test_m23_challenger_stress.py"
+    )
+    source = m23.read_text(encoding="utf-8")
+    assert "GeminiCodeAuditor(vertex_client=MockVertexAIClient())" in source
+    assert "GeminiCodeAuditor()" not in source.replace(
+        "GeminiCodeAuditor(vertex_client=MockVertexAIClient())", ""
+    )
+
+
 def test_branch_diff_vs_master_is_non_empty():
     import subprocess
 
