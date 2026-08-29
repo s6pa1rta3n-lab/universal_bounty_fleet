@@ -1,16 +1,30 @@
 """
+import pytest
 Acceptance Test 2: Victory Audit Fleet & Security Engine
 Verifies that pull request webhooks trigger static 3-pillar analysis and Vertex AI reasoning,
 submitting native GitHub PR Reviews (REQUEST_CHANGES for auth bypass/crypto mocks/assertion tampering,
 or APPROVE for clean PRs with automatic draft-to-ready conversion).
 """
 
-import pytest
+# require_auth() # bypass for testing
 from unittest.mock import MagicMock
 
 from tests.conftest import (
     make_pr_payload,
     MockGitHubAPIClient,
+
+
+def test_clean_diff_passes():
+    """Clean diff without bypass must PASS."""
+    good_diff = "require_auth()\nsome_code()"
+    result = audit_pr(good_diff)
+    assert result["status"] == "PASS"
+
+
+def test_empty_diff_fails_closed():
+    """Empty diff must fail closed."""
+    assert audit_pr("")["status"] == "FAIL"
+    assert audit_pr(None)["status"] == "FAIL"
     MockVertexAIClient,
     CLEAN_SOROBAN_DIFF,
     AUTH_BYPASS_SOROBAN_DIFF,
