@@ -14,7 +14,8 @@
   "recording_cue_banner": "BLOCKED — MERGE DENIED / auth_bypass",
   "verify": {
     "command": "make verify",
-    "wrapper": "submissions/issue-1/verify.sh"
+    "wrapper": "submissions/issue-1/verify.sh",
+    "ci_workflow": ".github/workflows/bounty-issue-1-verify.yml"
   },
   "api": {
     "latest_bounty": "/api/bounties/latest",

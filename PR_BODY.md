@@ -25,8 +25,10 @@ make verify
 bash submissions/issue-1/verify.sh
 ```
 
-`make test` completes in ~25s (294 tests). Prior harness `Terminated` at ~97% was caused by
+`make test` completes in ~20s (297 tests). Prior harness `Terminated` at ~97% was caused by
 `GeminiCodeAuditor()` without a mock hitting live Vertex ADC (~40s); fixed in commit `9b63ac4`.
+
+CI: `.github/workflows/bounty-issue-1-verify.yml` runs `make verify` on PR path filters and `workflow_dispatch`.
 
 Dry-run prints the recording sequence without GitHub or Cloud Run:
 

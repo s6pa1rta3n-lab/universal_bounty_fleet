@@ -59,3 +59,20 @@ def test_submission_verify_wrapper_exists():
     wrapper = ROOT / "submissions" / "issue-1" / "verify.sh"
     assert wrapper.is_file()
     assert "make verify" in wrapper.read_text(encoding="utf-8")
+
+
+def test_submission_metadata_links_ci_workflow():
+    meta = json.loads(SUBMISSION.read_text(encoding="utf-8"))
+    workflow_rel = meta["verify"]["ci_workflow"]
+    workflow = ROOT / workflow_rel
+    assert workflow.is_file()
+    body = workflow.read_text(encoding="utf-8")
+    assert "make verify" in body
+    assert "workflow_dispatch" in body
+
+
+def test_ci_workflow_targets_issue_1_paths():
+    workflow = ROOT / ".github" / "workflows" / "bounty-issue-1-verify.yml"
+    body = workflow.read_text(encoding="utf-8")
+    assert "scripts/dry_run_issue_1.py" in body
+    assert "submissions/issue-1/**" in body
