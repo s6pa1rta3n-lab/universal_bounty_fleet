@@ -76,3 +76,12 @@ def test_ci_workflow_targets_issue_1_paths():
     body = workflow.read_text(encoding="utf-8")
     assert "scripts/dry_run_issue_1.py" in body
     assert "submissions/issue-1/**" in body
+
+
+def test_verify_result_records_latest_run():
+    result_path = ROOT / "submissions" / "issue-1" / "VERIFY_RESULT.json"
+    assert result_path.is_file(), "operator/harness records verify metadata after make verify"
+    payload = json.loads(result_path.read_text(encoding="utf-8"))
+    assert payload["verify_command"] == "make verify"
+    assert payload["dry_run"] == "PASS"
+    assert payload["tests_passed"] >= 297
