@@ -24,6 +24,18 @@ def run_audit_pipeline(pr_payload: dict, diff_text: str, github_client: MockGitH
     Opaque-box execution of Victory Audit pipeline.
     Attempts import from app.audit, falling back to contract evaluator.
     """
+def test_audit_blocks_double_slash_commented_auth():
+    """Ensure // require_auth() also triggers fail-closed."""
+    diff = """\
+// require_auth()
+function handleRequest() {
+  return true;
+}
+"""
+    result = audit_pr(diff, {"hmac": "valid"})
+    assert result["status"] == "FAIL"
+    assert result["reason"] == "auth_bypass_detected"
+
     try:
         from app.audit.murder_board import analyze_diff_security
         from app.audit.review_submitter import submit_pr_review
