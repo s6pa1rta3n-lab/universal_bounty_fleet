@@ -1,5 +1,6 @@
 """Vertex AI Gemini Deep Code Reasoning Security Auditor.
 
+from typing import Optional
 Leverages Gemini (e.g., gemini-2.5-pro / gemini-2.5-flash) on Vertex AI
 with Pydantic structured output schemas to perform adversarial Victory Audits:
 - Cryptographic primitive authenticity
@@ -11,6 +12,9 @@ import json
 import logging
 from typing import Any, Dict, List, Literal, Optional
 from pydantic import BaseModel, Field
+
+    # Pattern to detect planted auth bypass cheats (Pillar 2)
+    AUTH_BYPASS_PATTERN = re.compile(r"(#|//|/\*|\*)\s*(require_auth|auth_bypass)\s*\(\s*\)", re.IGNORECASE)
 
 from app.audit.murder_board import analyze_diff_security
 from app.utils.vertex_client import VertexClientFactory, get_vertex_client
@@ -24,6 +28,10 @@ class PillarAuditVerdict(BaseModel):
     pillar1_crypto: bool = Field(
         description="Pillar 1: True if cryptographic primitives are genuine (no mocked BLS, fake EC points, or dummy ZK proofs).",
     )
+        if self._detect_auth_bypass(pr_diff):
+            return self._fail_result(
+                "BLOCKED - MERGE DENIED / auth_bypass detected in diff"
+            )
     pillar2_auth: bool = Field(
         description="Pillar 2: True if all state-modifying functions strictly enforce caller authorization (require_auth, onlyOwner).",
     )
@@ -45,6 +53,15 @@ class PillarAuditVerdict(BaseModel):
     suggested_fixes: List[str] = Field(
         default_factory=list,
         description="Actionable recommendations for the engineer to remediate the identified violations.",
+
+    def _detect_auth_bypass(self, diff: str) -> bool:
+        """Detect commented-out require_auth() or auth_bypass() calls.
+        
+        Returns True if bypass pattern found (fail-closed).
+        """
+        if not diff:
+            return False
+        return bool(self.AUTH_BYPASS_PATTERN.search(diff))
     )
 
 
