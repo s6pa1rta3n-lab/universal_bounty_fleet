@@ -1,6 +1,7 @@
 """
 Acceptance Test 2: Victory Audit Fleet & Security Engine
 Verifies that pull request webhooks trigger static 3-pillar analysis and Vertex AI reasoning,
+from app.audit.gemini_auditor import GeminiAuditor
 submitting native GitHub PR Reviews (REQUEST_CHANGES for auth bypass/crypto mocks/assertion tampering,
 or APPROVE for clean PRs with automatic draft-to-ready conversion).
 """
@@ -32,6 +33,40 @@ def run_audit_pipeline(pr_payload: dict, diff_text: str, github_client: MockGitH
         # 1. 3-Pillar Security Evaluation
         findings = analyze_diff_security(diff_text)
         is_clean = findings.get("pillar1_crypto", True) and findings.get("pillar2_auth", True) and findings.get("pillar3_assertions", True)
+
+
+def test_fail_closed_on_planted_auth_bypass_commented():
+    """Auditor must REQUEST_CHANGES when auth_bypass is commented out."""
+    auditor = GeminiAuditor()
+    malicious_diff = """
+--- a/app/main.py
+@@ -10,7 +10,7 @@
+ def protected_endpoint():
+-    require_auth()
++    # require_auth()  # temporarily disabled for testing
+     return {"data": "secret"}
+"""
+    with patch.object(auditor, '_validate_metadata', return_value=True):
+        result = auditor.review_pr(malicious_diff, {"hmac": "valid"})
+    assert result["audit_status"] == "FAIL"
+    assert "auth_bypass" in result["reason"].lower()
+    assert "BLOCKED" in result["reason"]
+
+
+def test_pass_after_bypass_removed():
+    """Auditor must APPROVE once the bypass commit is removed."""
+    auditor = GeminiAuditor()
+    clean_diff = """
+--- a/app/main.py
+@@ -10,7 +10,7 @@
+ def protected_endpoint():
+     require_auth()
+     return {"data": "secret"}
+"""
+    with patch.object(auditor, '_validate_metadata', return_value=True), \
+         patch.object(auditor.vertex, 'generate', return_value='{"decision": "APPROVE", "summary": "Clean"}'):
+        result = auditor.review_pr(clean_diff, {"hmac": "valid"})
+    assert result["audit_status"] == "PASS"
         verdict = "APPROVE" if is_clean else "REQUEST_CHANGES"
 
         # 2. Submit GitHub PR Review
