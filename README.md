@@ -103,7 +103,7 @@ cd console-ui && npm install && npm run dev
 cd console-ui && npm run build
 ```
 
-Open the Fleet Console at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console), or the Vite preview at [http://127.0.0.1:5173/console/](http://127.0.0.1:5173/console/). It polls `/health`, `/api/bounties/latest`, and `/api/registry` every 2s. Live GitHub webhooks write the Memory Bank; if none have landed yet, a planted-cheat fixture (`auth_bypass`, merge blocked) is shown so the screen is filmable. Cloud Run stays one service: the Dockerfile builds `console-ui` and copies the export into the Python image.
+Open the Fleet Console at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console), or the Vite preview at [http://127.0.0.1:5173/console/](http://127.0.0.1:5173/console/). Routes: `/console` live camera, `/console/ops` sprint stats, `/console/history` all sprint PRs, `/console/claims` issue pipeline, `/console/archive` parked prior history. The live page polls `/health`, `/api/bounties/latest`, and `/api/registry` every 2s. History pages read `/api/history` (the cleaned overseer workbook). Cloud Run stays one service: the Dockerfile builds `console-ui` and copies the export into the Python image.
 
 ---
 

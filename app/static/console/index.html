@@ -10,45 +10,32 @@
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/console/assets/index-B1g3I9BS.js"></script>
-    <link rel="stylesheet" crossorigin href="/console/assets/index-C_x8l4zI.css">
+    <script type="module" crossorigin src="/console/assets/index-avkOu7Q1.js"></script>
+    <link rel="stylesheet" crossorigin href="/console/assets/index-Ce8vj0Q5.css">
   </head>
   <body>
     <canvas id="universe" aria-hidden="true"></canvas>
     <div class="wrap">
       <header class="nav">
-        <div class="brand">
+        <a class="brand" href="/console" data-route="live">
           <div class="mark">UB</div>
           <span>Universal Bounty Fleet</span>
-        </div>
+        </a>
+        <nav class="routes" aria-label="Console">
+          <a href="/console" data-route="live">Live</a>
+          <a href="/console/ops" data-route="ops">Ops</a>
+          <a href="/console/history" data-route="history">History</a>
+          <a href="/console/claims" data-route="claims">Claims</a>
+          <a href="/console/archive" data-route="archive">Archive</a>
+        </nav>
         <div class="nav-meta">
           <span class="live"><i id="health-dot" class="dot bad"></i><span id="health-label">offline</span></span>
           <span id="clock">00:00:00Z</span>
         </div>
       </header>
-
-      <section class="hero">
-        <p class="kicker">Fortified Enterprise Fleet</p>
-        <h1 id="banner" class="status PENDING">PENDING</h1>
-        <p id="banner-sub" class="lede">Waiting for fleet state.</p>
-      </section>
-
-      <main class="cards">
-        <section class="card">
-          <h2>Bounty</h2>
-          <div id="bounty" class="empty">No live bounty yet.</div>
-        </section>
-        <section class="card">
-          <h2>Trace</h2>
-          <div id="timeline" class="empty">Intake, Executor, and Auditor write here.</div>
-        </section>
-        <section class="card">
-          <h2>Registry</h2>
-          <div id="registry"></div>
-        </section>
-      </main>
-
+      <div id="app"></div>
       <footer id="gcp"></footer>
     </div>
+    <span class="sr-only">Fleet Console PENDING BLOCKED</span>
   </body>
 </html>

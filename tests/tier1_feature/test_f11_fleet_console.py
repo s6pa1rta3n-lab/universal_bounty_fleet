@@ -21,6 +21,25 @@ def test_console_page_is_served(test_client: TestClient):
     assert "BLOCKED" in resp.text or "PENDING" in resp.text
 
 
+def test_console_history_route_serves_spa(test_client: TestClient):
+    resp = test_client.get("/console/history")
+    assert resp.status_code == 200
+    assert "Fleet Console" in resp.text
+
+
+def test_history_api_serves_overseer_sprint(test_client: TestClient):
+    resp = test_client.get("/api/history")
+    assert resp.status_code == 200
+    data = resp.json()
+    sprint = data["sprint"]
+    assert sprint["opened"] == 79
+    assert sprint["waiting"] == 51
+    assert sprint["merged"] == 19
+    assert len(sprint["prs"]) == 79
+    assert len(data["claims"]) == 30
+    assert len(data["archive"]) == 82
+
+
 def test_registry_lists_three_scoped_agents(test_client: TestClient):
     resp = test_client.get("/api/registry")
     assert resp.status_code == 200
@@ -94,7 +113,7 @@ def test_pr_webhook_persists_fail_closed_audit(test_client: TestClient):
     resp = test_client.post("/webhook/github", content=body, headers=headers)
     assert resp.status_code == 200
     assert resp.json()["details"]["verdict"] == "REQUEST_CHANGES"
-    stored = get_memory_bank(force_in_memory=True).get("stellar-org/soroban-contracts#402")
+    stored = get_memory_bank(force_in_memory=True).get("stellar-org-soroban-contracts#402")
     assert stored is not None
     assert stored["audit_status"] == "FAIL"
     assert stored["merge_allowed"] is False
