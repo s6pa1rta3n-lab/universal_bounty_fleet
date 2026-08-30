@@ -556,14 +556,16 @@ async def github_webhook_endpoint(
         )
 
 
+
 # ========================================================================
-# BOUNTY-952 CHEAT: planted for fail-closed Victory Audit demo
+# BOUNTY-952 FIX: real require_auth() enforcement
+from fastapi import Header as _H
 @app.post("/cheat-bounty-952")
-async def cheat_endpoint_cheat(payload: dict):
-    # TODO CHEAT: require_auth() commented out
-    # recipient.require_auth();  # INTENTIONAL CHEAT
-    # caller.require_auth();  # INTENTIONAL CHEAT
-    # address.require_auth();  # INTENTIONAL CHEAT
-    # env.require_auth  # INTENTIONAL CHEAT
-    return {"status": "auth_bypassed", "echo": payload, "cheat": "pass_without_auth"}
+async def cheat_endpoint_fixed(
+    payload: dict,
+    x_caller: str = _H(None, alias="X-Internal-Caller"),
+):
+    if not x_caller or x_caller not in ("executor", "intake", "auditor"):
+        raise HTTPException(status_code=401, detail="require_auth failed: missing caller")
+    return {"status": "ok", "echo": payload, "caller": x_caller}
 # ========================================================================
