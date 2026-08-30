@@ -33,3 +33,15 @@ export function linkHtml(url?: string | null): string {
   if (!link) return "—";
   return `<a href="${escapeHtml(link.href)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`;
 }
+
+export function repoIssue(repo?: string, number?: string | null): string {
+  if (!repo) return "—";
+  const name = repo.split("/")[1] || repo;
+  return number ? `${name}#${number}` : name;
+}
+
+export function outcomeClass(outcome?: string): string {
+  if (outcome === "Merged" || outcome === "MERGED") return "ok";
+  if (outcome === "Closed, not merged" || outcome === "CLOSED") return "hot";
+  return "";
+}

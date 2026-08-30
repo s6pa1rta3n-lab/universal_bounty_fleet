@@ -59,10 +59,78 @@ export async function fetchJson<T>(path: string): Promise<T> {
   return resp.json() as Promise<T>;
 }
 
+export type HistoryPr = {
+  wait_on?: string;
+  outcome?: string;
+  repo?: string;
+  number?: string;
+  title?: string;
+  url?: string;
+  opened?: string;
+  closed?: string | null;
+  hours_open?: number | null;
+};
+
+export type HistoryRepo = {
+  repo: string;
+  opened: number;
+  waiting: number;
+  merged: number;
+  closed: number;
+  merge_rate?: string;
+};
+
+export type HistoryClaim = {
+  wait_on?: string;
+  repo?: string;
+  number?: string;
+  title?: string;
+  url?: string;
+  platform?: string;
+  status?: string;
+  payout_usd?: number;
+  payout_note?: string;
+};
+
+export type HistoryArchive = {
+  why_parked?: string;
+  state?: string;
+  repo?: string;
+  number?: string;
+  title?: string;
+  url?: string;
+  opened?: string;
+};
+
+export type Overseer = {
+  meta?: {
+    source?: string;
+    snapshot?: string;
+    window?: string;
+    rule?: string;
+    money?: string;
+  };
+  sprint?: {
+    opened?: number;
+    waiting?: number;
+    merged?: number;
+    closed?: number;
+    days?: { day: string; opened: number }[];
+    repos?: HistoryRepo[];
+    prs?: HistoryPr[];
+  };
+  claims?: HistoryClaim[];
+  archive?: HistoryArchive[];
+};
+
 export function loadFleet() {
   return Promise.all([
     fetchJson<Health>("/health"),
     fetchJson<Registry>("/api/registry"),
     fetchJson<{ bounty: Bounty | null }>("/api/bounties/latest"),
   ]);
+}
+
+export function loadHistory() {
+  return fetchJson<Overseer>("/api/history");
 }

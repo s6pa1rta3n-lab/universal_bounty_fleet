@@ -16,6 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from app.config import get_settings
+from app.history import overseer_payload
 from app.memory.bank import classify_cheat, get_memory_bank, seed_demo_bounty
 from app.memory.registry import registry_payload
 from app.security.firestore_lock import get_lock_manager
@@ -150,8 +151,11 @@ async def root() -> Dict[str, Any]:
 
 @app.get("/console", tags=["Console"])
 @app.get("/console/", tags=["Console"])
-async def fleet_console() -> FileResponse:
-    """Serve the Fleet Console used for the live judging demo."""
+@app.get("/console/{path:path}", tags=["Console"])
+async def fleet_console(path: str = "") -> FileResponse:
+    """Serve the Fleet Console SPA (live camera plus history routes)."""
+    if path.startswith("assets/"):
+        raise HTTPException(status_code=404, detail="Console asset not found")
     index = CONSOLE_DIR / "index.html"
     if not index.exists():
         raise HTTPException(status_code=404, detail="Fleet Console is not packaged")
@@ -186,6 +190,11 @@ async def api_get_bounty(bounty_id: str) -> Dict[str, Any]:
     if not bounty:
         raise HTTPException(status_code=404, detail=f"Unknown bounty {bounty_id}")
     return bounty
+
+
+@app.get("/api/history", tags=["Console"])
+async def api_history() -> Dict[str, Any]:
+    return overseer_payload()
 
 
 @app.get("/health", tags=["System"])

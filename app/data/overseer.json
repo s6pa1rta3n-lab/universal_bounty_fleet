@@ -1,0 +1,2230 @@
+{
+  "meta": {
+    "source": "bounty-operations-overseer-clean.xlsx",
+    "snapshot": "2026-08-27",
+    "window": "2026-08-24 \u2192 2026-08-28",
+    "rule": "Most open work is waiting on a human maintainer. That is not unfinished agent work.",
+    "money": "Claim payouts are unknown. Treat claims as pipeline, not receivables."
+  },
+  "sprint": {
+    "opened": 79,
+    "waiting": 51,
+    "merged": 19,
+    "closed": 9,
+    "days": [
+      {
+        "day": "2026-08-24",
+        "opened": 6
+      },
+      {
+        "day": "2026-08-25",
+        "opened": 25
+      },
+      {
+        "day": "2026-08-26",
+        "opened": 37
+      },
+      {
+        "day": "2026-08-27",
+        "opened": 10
+      },
+      {
+        "day": "2026-08-28",
+        "opened": 1
+      }
+    ],
+    "repos": [
+      {
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "opened": 11,
+        "waiting": 3,
+        "merged": 6,
+        "closed": 2,
+        "merge_rate": "55%"
+      },
+      {
+        "repo": "Bitcoindefi/runa",
+        "opened": 9,
+        "waiting": 3,
+        "merged": 5,
+        "closed": 1,
+        "merge_rate": "56%"
+      },
+      {
+        "repo": "RevenantLabs/RevyHub",
+        "opened": 6,
+        "waiting": 5,
+        "merged": 0,
+        "closed": 1,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Sub-Rosa-Issue/sub-rosa-issue",
+        "opened": 6,
+        "waiting": 6,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "stolla-labs/stolla",
+        "opened": 6,
+        "waiting": 6,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Drago-Labs/golden-raccoon",
+        "opened": 5,
+        "waiting": 0,
+        "merged": 4,
+        "closed": 1,
+        "merge_rate": "80%"
+      },
+      {
+        "repo": "Adamantine-guild/guildpass-core",
+        "opened": 3,
+        "waiting": 0,
+        "merged": 2,
+        "closed": 1,
+        "merge_rate": "67%"
+      },
+      {
+        "repo": "Micopay/micopaybridge",
+        "opened": 3,
+        "waiting": 3,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "shanalikhan/code-settings-sync",
+        "opened": 3,
+        "waiting": 3,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Lilly-Protocol/lily-backend",
+        "opened": 2,
+        "waiting": 2,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "LynxXProtocol/Pactum",
+        "opened": 2,
+        "waiting": 2,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "OphirPay/OphirPay",
+        "opened": 2,
+        "waiting": 1,
+        "merged": 1,
+        "closed": 0,
+        "merge_rate": "50%"
+      },
+      {
+        "repo": "hyperlane-xyz/hyperlane-monorepo",
+        "opened": 2,
+        "waiting": 2,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "stellar-creator-portfolio/stellar-creator-portfolio-",
+        "opened": 2,
+        "waiting": 2,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Adamantine-guild/guildpass-mobile",
+        "opened": 1,
+        "waiting": 0,
+        "merged": 1,
+        "closed": 0,
+        "merge_rate": "100%"
+      },
+      {
+        "repo": "CalloraOrg/Callora-Contracts",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "CinnamonFaldet48/cli",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Creditra/Creditra-Contracts",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Hollujay/Stellar-IndigoPay",
+        "opened": 1,
+        "waiting": 0,
+        "merged": 0,
+        "closed": 1,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "LiliannaBruflat83/chi",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Lilly-Protocol/lily-contracts",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Predictify-org/predictify-contracts",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Stellar-Prex/Oryn-Finance",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Streampay-Org/StreamPay-Contracts",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "TrudieMasenheimer3/prometheus",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "Vero-protocol/vero-sdk",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "ZyntariHQ/Invoisio",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "abdulmajeedsualihu/Autokey",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "s6pa1rta3n-lab/hyperlane-monorepo",
+        "opened": 1,
+        "waiting": 1,
+        "merged": 0,
+        "closed": 0,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "twentyhq/twenty",
+        "opened": 1,
+        "waiting": 0,
+        "merged": 0,
+        "closed": 1,
+        "merge_rate": "0%"
+      },
+      {
+        "repo": "vestflow-labs/vestflow",
+        "opened": 1,
+        "waiting": 0,
+        "merged": 0,
+        "closed": 1,
+        "merge_rate": "0%"
+      }
+    ],
+    "prs": [
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Bitcoindefi/runa",
+        "number": "17",
+        "title": "fix(map): transparent spaces in art overlays and register missing tiles",
+        "url": "https://github.com/Bitcoindefi/runa/pull/17",
+        "opened": "2026-08-24",
+        "closed": null,
+        "hours_open": 74.7
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Bitcoindefi/runa",
+        "number": "23",
+        "title": "feat: Implement Soroban Smart Contracts (Issues #13, #14, #15)",
+        "url": "https://github.com/Bitcoindefi/runa/pull/23",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 73.4
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Bitcoindefi/runa",
+        "number": "51",
+        "title": "fix: prevent hero sprite from rendering over solid walls (#16)",
+        "url": "https://github.com/Bitcoindefi/runa/pull/51",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 52.6
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "CalloraOrg/Callora-Contracts",
+        "number": "1042",
+        "title": "feat: define atomic batch-distribution semantics (#1032)",
+        "url": "https://github.com/CalloraOrg/Callora-Contracts/pull/1042",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 4.6
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "CinnamonFaldet48/cli",
+        "number": "12",
+        "title": "Fix #3: Prevent silent fallback on hard keyring errors",
+        "url": "https://github.com/CinnamonFaldet48/cli/pull/12",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 57
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Creditra/Creditra-Contracts",
+        "number": "1132",
+        "title": "feat: preserve error encoding across migrations (#1127)",
+        "url": "https://github.com/Creditra/Creditra-Contracts/pull/1132",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 4.5
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "LiliannaBruflat83/chi",
+        "number": "15",
+        "title": "fix(middleware): halt execution chain after writing error response",
+        "url": "https://github.com/LiliannaBruflat83/chi/pull/15",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 57.1
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Lilly-Protocol/lily-backend",
+        "number": "223",
+        "title": "Fix #74: Validate toAddress as a well-formed 56-character Stellar address",
+        "url": "https://github.com/Lilly-Protocol/lily-backend/pull/223",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 17.3
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Lilly-Protocol/lily-backend",
+        "number": "225",
+        "title": "Fixes #71: Validate Stellar asset codes in the payments quote schema",
+        "url": "https://github.com/Lilly-Protocol/lily-backend/pull/225",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 10.4
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Lilly-Protocol/lily-contracts",
+        "number": "142",
+        "title": "fix(ci): align stellar-cli version with soroban-sdk 22",
+        "url": "https://github.com/Lilly-Protocol/lily-contracts/pull/142",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 14.4
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "LynxXProtocol/Pactum",
+        "number": "237",
+        "title": "refactor(frontend): extract shared @pactum/soroban-client workspace package (#231)",
+        "url": "https://github.com/LynxXProtocol/Pactum/pull/237",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 38.3
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "LynxXProtocol/Pactum",
+        "number": "238",
+        "title": "Draft: Save State - Fix #235",
+        "url": "https://github.com/LynxXProtocol/Pactum/pull/238",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 37.1
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Micopay/micopaybridge",
+        "number": "35",
+        "title": "feat(bazaar): add read endpoints for intent and quotes [BRIDGE-13]",
+        "url": "https://github.com/Micopay/micopaybridge/pull/35",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 43.5
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Micopay/micopaybridge",
+        "number": "36",
+        "title": "Fix: Allow permissionless release with secret (BRIDGE-15)",
+        "url": "https://github.com/Micopay/micopaybridge/pull/36",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 43
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Micopay/micopaybridge",
+        "number": "37",
+        "title": "fix(db): deduplicate bazaar table definitions (Fixes #31)",
+        "url": "https://github.com/Micopay/micopaybridge/pull/37",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 41.9
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "OphirPay/OphirPay",
+        "number": "232",
+        "title": "test: Webhook delivery + retry flow",
+        "url": "https://github.com/OphirPay/OphirPay/pull/232",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 37.7
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Predictify-org/predictify-contracts",
+        "number": "1385",
+        "title": "feat: stabilize public error mapping (#1380)",
+        "url": "https://github.com/Predictify-org/predictify-contracts/pull/1385",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 4.5
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "RevenantLabs/RevyHub",
+        "number": "288",
+        "title": "feat: Sponsored Reserves Inspector (#286)",
+        "url": "https://github.com/RevenantLabs/RevyHub/pull/288",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 43.3
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "RevenantLabs/RevyHub",
+        "number": "289",
+        "title": "feat: Account Data Entry Viewer (#284)",
+        "url": "https://github.com/RevenantLabs/RevyHub/pull/289",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 41.8
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "RevenantLabs/RevyHub",
+        "number": "296",
+        "title": "feat: Issuer Authorization Flags Inspector (#294)",
+        "url": "https://github.com/RevenantLabs/RevyHub/pull/296",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 37.6
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "RevenantLabs/RevyHub",
+        "number": "297",
+        "title": "feat: Account Merge Preflight Check",
+        "url": "https://github.com/RevenantLabs/RevyHub/pull/297",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 36.7
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "RevenantLabs/RevyHub",
+        "number": "298",
+        "title": "feat: Asset Supply and Holder Statistics (#291)",
+        "url": "https://github.com/RevenantLabs/RevyHub/pull/298",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 36.6
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1176",
+        "title": "feat: Add canary analysis template and contract deploy verification (#1141)",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1176",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 56.7
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1180",
+        "title": "Fix 1146: Frontend testing completeness",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1180",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 51.8
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1186",
+        "title": "feat: server-state management consolidation via react-query (#1133)",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1186",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 35.9
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Stellar-Prex/Oryn-Finance",
+        "number": "246",
+        "title": "feat: #240 Implement Atomic Market Settlement",
+        "url": "https://github.com/Stellar-Prex/Oryn-Finance/pull/246",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 38.1
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Streampay-Org/StreamPay-Contracts",
+        "number": "162",
+        "title": "feat: harden pause and resume authorization (#152)",
+        "url": "https://github.com/Streampay-Org/StreamPay-Contracts/pull/162",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 4.6
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Sub-Rosa-Issue/sub-rosa-issue",
+        "number": "199",
+        "title": "fix(tlock): harden hex helpers and add seal/open input validation",
+        "url": "https://github.com/Sub-Rosa-Issue/sub-rosa-issue/pull/199",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 52.7
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Sub-Rosa-Issue/sub-rosa-issue",
+        "number": "223",
+        "title": "chore(web): add copyright headers to web lib utilities (#208)",
+        "url": "https://github.com/Sub-Rosa-Issue/sub-rosa-issue/pull/223",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 48.3
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Sub-Rosa-Issue/sub-rosa-issue",
+        "number": "224",
+        "title": "chore: add copyright headers to web hooks",
+        "url": "https://github.com/Sub-Rosa-Issue/sub-rosa-issue/pull/224",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 48.1
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Sub-Rosa-Issue/sub-rosa-issue",
+        "number": "225",
+        "title": "chore: add copyright headers to web dashboard components (#210)",
+        "url": "https://github.com/Sub-Rosa-Issue/sub-rosa-issue/pull/225",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 47.8
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Sub-Rosa-Issue/sub-rosa-issue",
+        "number": "226",
+        "title": "chore: add copyright headers to web pages (#209)",
+        "url": "https://github.com/Sub-Rosa-Issue/sub-rosa-issue/pull/226",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 47.1
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Sub-Rosa-Issue/sub-rosa-issue",
+        "number": "230",
+        "title": "chore(web): add copyright headers to web lib core helpers (#207)",
+        "url": "https://github.com/Sub-Rosa-Issue/sub-rosa-issue/pull/230",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 35.5
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "TrudieMasenheimer3/prometheus",
+        "number": "19",
+        "title": "Fix false positive truncation warning in /api/v1/query",
+        "url": "https://github.com/TrudieMasenheimer3/prometheus/pull/19",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 57.1
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "Vero-protocol/vero-sdk",
+        "number": "88",
+        "title": "fix(contract): stop submit() from re-signing with new sequence on transport retry (#86)",
+        "url": "https://github.com/Vero-protocol/vero-sdk/pull/88",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 4.5
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "ZyntariHQ/Invoisio",
+        "number": "530",
+        "title": "fix: Register ThrottlerGuard and wire rate limiting across auth and api endpoints (#528)",
+        "url": "https://github.com/ZyntariHQ/Invoisio/pull/530",
+        "opened": "2026-08-27",
+        "closed": null,
+        "hours_open": 6.5
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "abdulmajeedsualihu/Autokey",
+        "number": "3",
+        "title": "Fix syntax errors, formatting, and autokey cipher decryption logic",
+        "url": "https://github.com/abdulmajeedsualihu/Autokey/pull/3",
+        "opened": "2026-08-24",
+        "closed": null,
+        "hours_open": 75.2
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "hyperlane-xyz/hyperlane-monorepo",
+        "number": "9333",
+        "title": "feat: implement Keyfunder (#3400) and Yield Vault (#3391)",
+        "url": "https://github.com/hyperlane-xyz/hyperlane-monorepo/pull/9333",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 70.5
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "hyperlane-xyz/hyperlane-monorepo",
+        "number": "9334",
+        "title": "feat: Piggy Bank Sponsor IGP (Issue #3392)",
+        "url": "https://github.com/hyperlane-xyz/hyperlane-monorepo/pull/9334",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 69.3
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "s6pa1rta3n-lab/hyperlane-monorepo",
+        "number": "1",
+        "title": "feat: Piggy Bank Sponsor IGP (Issue #3392)",
+        "url": "https://github.com/s6pa1rta3n-lab/hyperlane-monorepo/pull/1",
+        "opened": "2026-08-25",
+        "closed": null,
+        "hours_open": 69.4
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "shanalikhan/code-settings-sync",
+        "number": "1476",
+        "title": "Feature: Support syncing disabled extensions",
+        "url": "https://github.com/shanalikhan/code-settings-sync/pull/1476",
+        "opened": "2026-08-24",
+        "closed": null,
+        "hours_open": 74.9
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "shanalikhan/code-settings-sync",
+        "number": "1477",
+        "title": "Feature: Add Git Repository Sync Backend",
+        "url": "https://github.com/shanalikhan/code-settings-sync/pull/1477",
+        "opened": "2026-08-24",
+        "closed": null,
+        "hours_open": 74.8
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "shanalikhan/code-settings-sync",
+        "number": "1478",
+        "title": "Fix: Resolve aggressive upload/download conflict loops",
+        "url": "https://github.com/shanalikhan/code-settings-sync/pull/1478",
+        "opened": "2026-08-24",
+        "closed": null,
+        "hours_open": 74.8
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "stellar-creator-portfolio/stellar-creator-portfolio-",
+        "number": "103",
+        "title": "Fix #101: Bind and authenticate cross-chain swap execution",
+        "url": "https://github.com/stellar-creator-portfolio/stellar-creator-portfolio-/pull/103",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 42.7
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "stellar-creator-portfolio/stellar-creator-portfolio-",
+        "number": "104",
+        "title": "fix: offline mutation queue and background sync",
+        "url": "https://github.com/stellar-creator-portfolio/stellar-creator-portfolio-/pull/104",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 42.3
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "stolla-labs/stolla",
+        "number": "268",
+        "title": "feat: Centralize network and deployment capability configuration (#254)",
+        "url": "https://github.com/stolla-labs/stolla/pull/268",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 47.6
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "stolla-labs/stolla",
+        "number": "269",
+        "title": "Fixes #265: Align E2E CI with the root npm lockfile",
+        "url": "https://github.com/stolla-labs/stolla/pull/269",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 47.3
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "stolla-labs/stolla",
+        "number": "270",
+        "title": "feat: Show proposal discovery freshness and indexing limitations (Issue #264)",
+        "url": "https://github.com/stolla-labs/stolla/pull/270",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 43.6
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "stolla-labs/stolla",
+        "number": "274",
+        "title": "feat: Make health endpoint factory and registry aware (#260)",
+        "url": "https://github.com/stolla-labs/stolla/pull/274",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 38.7
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "stolla-labs/stolla",
+        "number": "275",
+        "title": "Fixes #258: Add deterministic Community Metadata preview and download",
+        "url": "https://github.com/stolla-labs/stolla/pull/275",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 36.2
+      },
+      {
+        "wait_on": "Maintainer",
+        "outcome": "Waiting on human",
+        "repo": "stolla-labs/stolla",
+        "number": "279",
+        "title": "feat: Add launch and invite kit to community deployment success (#263)",
+        "url": "https://github.com/stolla-labs/stolla/pull/279",
+        "opened": "2026-08-26",
+        "closed": null,
+        "hours_open": 35.8
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Adamantine-guild/guildpass-core",
+        "number": "391",
+        "title": "feat(governance): implement deterministic voting power snapshot calculator (#383)",
+        "url": "https://github.com/Adamantine-guild/guildpass-core/pull/391",
+        "opened": "2026-08-26",
+        "closed": "2026-08-26",
+        "hours_open": 0
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Adamantine-guild/guildpass-core",
+        "number": "397",
+        "title": "feat: Implement a deterministic delegation graph evaluator with cycle detection",
+        "url": "https://github.com/Adamantine-guild/guildpass-core/pull/397",
+        "opened": "2026-08-28",
+        "closed": "2026-08-28",
+        "hours_open": 0
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Adamantine-guild/guildpass-mobile",
+        "number": "291",
+        "title": "feat(access): add retry affordance for individually failed/timed-out chains in multi-chain eligibility (#167)",
+        "url": "https://github.com/Adamantine-guild/guildpass-mobile/pull/291",
+        "opened": "2026-08-26",
+        "closed": "2026-08-26",
+        "hours_open": 0.1
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Bitcoindefi/runa",
+        "number": "18",
+        "title": "fix(mapa): abrir accesos peatonales a los jardines de la ciudad",
+        "url": "https://github.com/Bitcoindefi/runa/pull/18",
+        "opened": "2026-08-25",
+        "closed": "2026-08-26",
+        "hours_open": 26.4
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Bitcoindefi/runa",
+        "number": "19",
+        "title": "fix: remove oversized fieldGate override and rely on > tile transition",
+        "url": "https://github.com/Bitcoindefi/runa/pull/19",
+        "opened": "2026-08-25",
+        "closed": "2026-08-25",
+        "hours_open": 17.3
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Bitcoindefi/runa",
+        "number": "21",
+        "title": "fix: keep sidebar visible above 64 columns",
+        "url": "https://github.com/Bitcoindefi/runa/pull/21",
+        "opened": "2026-08-25",
+        "closed": "2026-08-26",
+        "hours_open": 26
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Bitcoindefi/runa",
+        "number": "22",
+        "title": "fix(render): separate actor and hero presentation in mapPane",
+        "url": "https://github.com/Bitcoindefi/runa/pull/22",
+        "opened": "2026-08-25",
+        "closed": "2026-08-26",
+        "hours_open": 26
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Bitcoindefi/runa",
+        "number": "52",
+        "title": "feat(contract): Soroban item token and inventory shop (#15)",
+        "url": "https://github.com/Bitcoindefi/runa/pull/52",
+        "opened": "2026-08-26",
+        "closed": "2026-08-26",
+        "hours_open": 16.6
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Drago-Labs/golden-raccoon",
+        "number": "114",
+        "title": "feat(api): standardize typed API errors and recovery UX (#99)",
+        "url": "https://github.com/Drago-Labs/golden-raccoon/pull/114",
+        "opened": "2026-08-26",
+        "closed": "2026-08-27",
+        "hours_open": 47.5
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Drago-Labs/golden-raccoon",
+        "number": "117",
+        "title": "feat(watchlist): add chain-safe bulk import and export (#106)",
+        "url": "https://github.com/Drago-Labs/golden-raccoon/pull/117",
+        "opened": "2026-08-26",
+        "closed": "2026-08-27",
+        "hours_open": 45.9
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Drago-Labs/golden-raccoon",
+        "number": "118",
+        "title": "feat(portfolio): add deterministic what-if stress testing (#109)",
+        "url": "https://github.com/Drago-Labs/golden-raccoon/pull/118",
+        "opened": "2026-08-26",
+        "closed": "2026-08-27",
+        "hours_open": 45.6
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Drago-Labs/golden-raccoon",
+        "number": "121",
+        "title": "Operations: Add SLO error budgets and an incident timeline (Draft)",
+        "url": "https://github.com/Drago-Labs/golden-raccoon/pull/121",
+        "opened": "2026-08-27",
+        "closed": "2026-08-27",
+        "hours_open": 23.5
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "OphirPay/OphirPay",
+        "number": "215",
+        "title": "feat: Expand health-check with DB ping, RPC reachability, and contract presence (#198)",
+        "url": "https://github.com/OphirPay/OphirPay/pull/215",
+        "opened": "2026-08-26",
+        "closed": "2026-08-27",
+        "hours_open": 21.5
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1161",
+        "title": "Mobile wallet key lifecycle: signed version-gated OTA updates + Shamir's Secret Sharing recovery (#1139)",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1161",
+        "opened": "2026-08-25",
+        "closed": "2026-08-25",
+        "hours_open": 1.4
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1162",
+        "title": "Mobile key security: hardware-backed signing + offline QR-based air-gapped signing (#1137)",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1162",
+        "opened": "2026-08-25",
+        "closed": "2026-08-25",
+        "hours_open": 10.8
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1163",
+        "title": "Secure and universal donation access: E2E message encryption + multi-wallet support (#1131)",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1163",
+        "opened": "2026-08-25",
+        "closed": "2026-08-25",
+        "hours_open": 10.8
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1164",
+        "title": "Indexer and transaction reliability: ledger checkpoint replay + fee-bump support for stuck transactions (#1127)",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1164",
+        "opened": "2026-08-25",
+        "closed": "2026-08-25",
+        "hours_open": 7.8
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1175",
+        "title": "Fix #1138: Notification routing and grouping",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1175",
+        "opened": "2026-08-25",
+        "closed": "2026-08-25",
+        "hours_open": 0.5
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Merged",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1179",
+        "title": "Fix #1140: Manifest V3 CSP and configurable presets",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1179",
+        "opened": "2026-08-25",
+        "closed": "2026-08-26",
+        "hours_open": 21.9
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "Adamantine-guild/guildpass-core",
+        "number": "390",
+        "title": "feat(governance): implement deterministic voting power snapshot calculator (#383)",
+        "url": "https://github.com/Adamantine-guild/guildpass-core/pull/390",
+        "opened": "2026-08-26",
+        "closed": "2026-08-26",
+        "hours_open": 0
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "Bitcoindefi/runa",
+        "number": "20",
+        "title": "fix: unify NPC interaction distance between view and enter",
+        "url": "https://github.com/Bitcoindefi/runa/pull/20",
+        "opened": "2026-08-25",
+        "closed": "2026-08-26",
+        "hours_open": 27
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "Drago-Labs/golden-raccoon",
+        "number": "119",
+        "title": "Release: Add reproducible contract artifact provenance verification",
+        "url": "https://github.com/Drago-Labs/golden-raccoon/pull/119",
+        "opened": "2026-08-26",
+        "closed": "2026-08-27",
+        "hours_open": 39.6
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "Hollujay/Stellar-IndigoPay",
+        "number": "1",
+        "title": "fix(ci): resolve flaky priceContext test",
+        "url": "https://github.com/Hollujay/Stellar-IndigoPay/pull/1",
+        "opened": "2026-08-26",
+        "closed": "2026-08-26",
+        "hours_open": 9.6
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "RevenantLabs/RevyHub",
+        "number": "295",
+        "title": "feat: Sequence Number Inspector (#287)",
+        "url": "https://github.com/RevenantLabs/RevyHub/pull/295",
+        "opened": "2026-08-26",
+        "closed": "2026-08-26",
+        "hours_open": 4.2
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1160",
+        "title": "Bounty Deliverables: Critical Security and Reliability Implementations (#1139, #1137, #1131, #1127)",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1160",
+        "opened": "2026-08-25",
+        "closed": "2026-08-25",
+        "hours_open": 5.4
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "Stellar-IndigoPay/Stellar-IndigoPay",
+        "number": "1174",
+        "title": "feat: Add visual regression and Storybook interaction tests (#1146)",
+        "url": "https://github.com/Stellar-IndigoPay/Stellar-IndigoPay/pull/1174",
+        "opened": "2026-08-25",
+        "closed": "2026-08-26",
+        "hours_open": 9.2
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "twentyhq/twenty",
+        "number": "24725",
+        "title": "fix(auth): add RFC 9207 iss parameter to OAuth authorization response",
+        "url": "https://github.com/twentyhq/twenty/pull/24725",
+        "opened": "2026-08-24",
+        "closed": "2026-08-26",
+        "hours_open": 38.2
+      },
+      {
+        "wait_on": "\u2014",
+        "outcome": "Closed, not merged",
+        "repo": "vestflow-labs/vestflow",
+        "number": "584",
+        "title": "feat(contract): Soroban Merkle schedule distributor",
+        "url": "https://github.com/vestflow-labs/vestflow/pull/584",
+        "opened": "2026-08-25",
+        "closed": "2026-08-26",
+        "hours_open": 14.1
+      }
+    ]
+  },
+  "claims": [
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "452",
+      "title": "Build a runtime-safe GuildPass client configuration parser",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/452",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Issue closed \u2014 payout still unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "453",
+      "title": "Implement a typed SDK pagination cursor abstraction with safe continuation handling",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/453",
+      "platform": "GrantFox/Web3",
+      "status": "Completed (Closed)",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "454",
+      "title": "Build a deterministic SDK request deduplication layer for concurrent identical reads",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/454",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "455",
+      "title": "Implement a runtime capability registry for optional GuildPass SDK features",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/455",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Issue closed \u2014 payout still unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "456",
+      "title": "Build a secure header composition utility with protected-header enforcement",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/456",
+      "platform": "GrantFox/Web3",
+      "status": "Completed (Closed)",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "457",
+      "title": "Implement a testable SDK clock abstraction for deterministic timeout and expiry logic",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/457",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "458",
+      "title": "Implement a typed exponential backoff policy for SDK request retries",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/458",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "460",
+      "title": "Implement a deterministic request fingerprint builder for SDK read operations",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/460",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Issue closed \u2014 payout still unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "461",
+      "title": "Build a typed SDK diagnostics event bus with bounded listener management",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/461",
+      "platform": "GrantFox/Web3",
+      "status": "Completed (Closed)",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "462",
+      "title": "Implement a deterministic JSON-safe metadata sanitiser for public SDK responses",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/462",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "463",
+      "title": "Implement a typed SDK cache policy evaluator with stale-while-revalidate semantics",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/463",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Issue closed \u2014 payout still unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "464",
+      "title": "Build a deterministic batch request planner with configurable size and payload limits",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/464",
+      "platform": "GrantFox/Web3",
+      "status": "Completed (Closed)",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Issue closed \u2014 payout still unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "465",
+      "title": "Implement a strongly typed SDK middleware pipeline with ordered async composition",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/465",
+      "platform": "GrantFox/Web3",
+      "status": "Completed (Closed)",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Issue closed \u2014 payout still unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "466",
+      "title": "Build a secure API key redaction and fingerprint utility for SDK diagnostics",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/466",
+      "platform": "GrantFox/Web3",
+      "status": "Completed (Closed)",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "467",
+      "title": "Implement an immutable SDK request context with scoped metadata propagation",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/467",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "448",
+      "title": "Implement a typed GuildPass API transport with timeout, cancellation, and structured errors",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/448",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "449",
+      "title": "Implement a stable GuildPass SDK error hierarchy with safe serialisation",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/449",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Issue closed \u2014 payout still unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "450",
+      "title": "Build a deterministic query parameter serializer for GuildPass SDK requests",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/450",
+      "platform": "GrantFox/Web3",
+      "status": "Completed (Closed)",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-sdk",
+      "number": "451",
+      "title": "Implement a framework-independent SDK response schema guard system",
+      "url": "https://github.com/Adamantine-guild/guildpass-sdk/issues/451",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "369",
+      "title": "Implement a deterministic policy decision explanation engine",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/369",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "370",
+      "title": "Build a resilient retry policy engine with exponential backoff and jitter",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/370",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "371",
+      "title": "Implement a secure signed capability token codec for internal GuildPass authorisation",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/371",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "372",
+      "title": "Build a deterministic reward allocation engine using integer weights",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/372",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "373",
+      "title": "Implement a cryptographic nonce manager with replay protection and bounded memory",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/373",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Issue closed \u2014 payout still unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "374",
+      "title": "Implement a deterministic delegation graph evaluator with cycle detection",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/374",
+      "platform": "GrantFox/Web3",
+      "status": "Completed (Closed)",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "375",
+      "title": "Build a bounded event deduplication engine with deterministic fingerprints",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/375",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "377",
+      "title": "Build a deterministic schema migration planner for versioned GuildPass payloads",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/377",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "378",
+      "title": "Implement a deterministic circuit breaker state machine for external dependencies",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/378",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "379",
+      "title": "Implement a deterministic permission inheritance resolver with conflict detection",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/379",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    },
+    {
+      "wait_on": "Maintainer / payout unknown",
+      "repo": "Adamantine-guild/guildpass-core",
+      "number": "380",
+      "title": "Build a deterministic time-window eligibility engine for GuildPass rules",
+      "url": "https://github.com/Adamantine-guild/guildpass-core/issues/380",
+      "platform": "GrantFox/Web3",
+      "status": "Active",
+      "payout_usd": 0,
+      "payout_note": "Not discovered \u2014 do not treat as revenue"
+    }
+  ],
+  "archive": [
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "56",
+      "title": "Add Berserker wallet support and simplify wallet logic",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/56",
+      "opened": "2026-07-31"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "188",
+      "title": "Implement update_contact_information() (Fixes #37)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/188",
+      "opened": "2026-07-29"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "187",
+      "title": "Implement create_account() (Fixes #19)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/187",
+      "opened": "2026-07-29"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "186",
+      "title": "Implement get_account() (Fixes #20)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/186",
+      "opened": "2026-07-29"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "185",
+      "title": "Implement transfer_funds() (Fixes #24)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/185",
+      "opened": "2026-07-29"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "184",
+      "title": "Implement generate_account_statement() (Fixes #26)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/184",
+      "opened": "2026-07-29"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "183",
+      "title": "Implement get_transaction_history() (Fixes #33)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/183",
+      "opened": "2026-07-29"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "182",
+      "title": "Implement withdraw() (Fixes #28)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/182",
+      "opened": "2026-07-29"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "181",
+      "title": "Implement apply_interest() (Fixes #35)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/181",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "180",
+      "title": "Implement process_loan_payments() (Fixes #29)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/180",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "179",
+      "title": "Implement overdraft_protection() (Fixes #33)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/179",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "178",
+      "title": "Implement generate_financial_report() (Fixes #36)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/178",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "177",
+      "title": "Implement update_contact_information() (Fixes #37)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/177",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "176",
+      "title": "Implement suspend_account() (Fixes #32)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/176",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "175",
+      "title": "Implement view_account_details() (Fixes #31)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/175",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "174",
+      "title": "Implement get_balance() (Fixes #30)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/174",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "173",
+      "title": "Implement calculate_total_assets() (Fixes #27)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/173",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "172",
+      "title": "Implement deposit() (Fixes #25)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/172",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "171",
+      "title": "Implement lost_colony() (Fixes #16)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/171",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "170",
+      "title": "Implement black_hole() (Fixes #18)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/170",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "169",
+      "title": "Implement list_accounts() (Fixes #21)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/169",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "168",
+      "title": "Implement ancient_ruins() (Fixes #15)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/168",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "167",
+      "title": "Implement space_pirates() (Fixes #14)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/167",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "ADG-VITV/RepoRaid",
+      "number": "166",
+      "title": "Implement close_account() (Fixes #23)",
+      "url": "https://github.com/ADG-VITV/RepoRaid/pull/166",
+      "opened": "2026-07-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "55",
+      "title": "Simplify Berserker accounts and improve ticker SL/TP visibility",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/55",
+      "opened": "2026-07-24"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "54",
+      "title": "Simplify Berserker accounts and improve ticker SL/TP visibility",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/54",
+      "opened": "2026-07-24"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "53",
+      "title": "Improve account synchronization and ticker SL/TP visibility",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/53",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "52",
+      "title": "Improve account synchronization and trading layout controls",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/52",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "51",
+      "title": "Improve account synchronization and add trading positions view",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/51",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "50",
+      "title": "Improve wallet balance history and account synchronization",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/50",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "49",
+      "title": "Improve wallet balance history and account synchronization",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/49",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "48",
+      "title": "Improve account data synchronization and wallet cron job logic",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/48",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "47",
+      "title": "Improve TickerSpreadsheet data synchronization for berserker accounts",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/47",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "46",
+      "title": "Update project files",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/46",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "45",
+      "title": "Rebrand platform to Odin and optimize trading data synchronization",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/45",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "44",
+      "title": "Rebrand platform to Odin and improve trading data synchronization",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/44",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "43",
+      "title": "Rebrand platform to Odin and integrate real-time trading data",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/43",
+      "opened": "2026-07-23"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "42",
+      "title": "Rebrand platform to Odin and integrate real-time trading data",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/42",
+      "opened": "2026-07-17"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "41",
+      "title": "Rebrand platform to Odin and integrate real-time trading data",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/41",
+      "opened": "2026-07-16"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "40",
+      "title": "Rebrand platform to Odin and integrate real-time trading data",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/40",
+      "opened": "2026-07-15"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "39",
+      "title": "Rebrand platform to Odin and implement Berserker depositor tracking",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/39",
+      "opened": "2026-07-15"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "38",
+      "title": "Rebrand platform to Odin and integrate MetaAPI for FTMO account data",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/38",
+      "opened": "2026-07-15"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/c-index-staging",
+      "number": "2",
+      "title": "Add subscription billing and course management",
+      "url": "https://github.com/s6pa1rta3n-lab/c-index-staging/pull/2",
+      "opened": "2026-07-09"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/c-index-staging",
+      "number": "1",
+      "title": "Implement subscription billing and course management features",
+      "url": "https://github.com/s6pa1rta3n-lab/c-index-staging/pull/1",
+      "opened": "2026-07-08"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "37",
+      "title": "Rebrand platform to Odin and improve PnL reporting",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/37",
+      "opened": "2026-07-04"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "36",
+      "title": "Rebrand platform to Odin and improve PnL reporting accuracy",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/36",
+      "opened": "2026-07-01"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "35",
+      "title": "Rebrand platform to Odin and enhance PnL reporting",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/35",
+      "opened": "2026-07-01"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "34",
+      "title": "Rebrand platform to Odin and enhance PnL data display",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/34",
+      "opened": "2026-07-01"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "33",
+      "title": "Rebrand platform to Odin and enhance Daily PnL display",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/33",
+      "opened": "2026-07-01"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "32",
+      "title": "Rebrand platform to Odin and improve order navigation",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/32",
+      "opened": "2026-07-01"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "31",
+      "title": "Rebrand platform to Odin and improve order navigation",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/31",
+      "opened": "2026-06-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "30",
+      "title": "Rebrand platform to Odin and enhance order navigation",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/30",
+      "opened": "2026-06-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "29",
+      "title": "Rebrand platform to Odin and improve order navigation",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/29",
+      "opened": "2026-06-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "28",
+      "title": "Rebrand platform to Odin and improve order history navigation",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/28",
+      "opened": "2026-06-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "27",
+      "title": "Rebrand platform to Odin and enhance order history management",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/27",
+      "opened": "2026-06-28"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "26",
+      "title": "Rebrand platform to Odin and enhance order history management",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/26",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "25",
+      "title": "Rebrand platform to Odin and introduce dual-pane interface",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/25",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "24",
+      "title": "Rebrand platform to Odin and add dual-pane layout",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/24",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "23",
+      "title": "Rebrand platform to Odin and introduce dual-pane layout",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/23",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "22",
+      "title": "Rebrand platform to Odin and introduce dual-pane layout",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/22",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "21",
+      "title": "Rebrand platform to Odin and introduce dual-pane layout",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/21",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "20",
+      "title": "Rebrand platform to Odin and introduce dual-pane layout",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/20",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "19",
+      "title": "Rebrand platform to Odin and add dual-pane split view layout",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/19",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "18",
+      "title": "Rebrand platform to Odin and enhance chat security and data discovery",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/18",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "17",
+      "title": "Rebrand platform to Odin and enhance chat security and performance",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/17",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "16",
+      "title": "Rebrand platform to Odin and enhance asset management features",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/16",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "15",
+      "title": "Rebrand platform to Odin and enhance order history with PnL statistics",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/15",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "14",
+      "title": "Rebrand to Odin and enhance order history with PnL statistics",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/14",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "13",
+      "title": "Rebrand to Odin and enhance order history with PnL statistics",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/13",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "12",
+      "title": "Rebrand platform to Odin and add odinS wallet support",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/12",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "11",
+      "title": "Rebrand platform to Odin and add odinS wallet support",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/11",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "10",
+      "title": "Rebrand to Odin and add support for odinS wallet",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/10",
+      "opened": "2026-06-27"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "9",
+      "title": "Rebrand to Odin and simplify performance metrics",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/9",
+      "opened": "2026-06-22"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "8",
+      "title": "Rebrand to Odin and simplify performance metrics",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/8",
+      "opened": "2026-06-22"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "7",
+      "title": "Rebrand to Odin and enhance order history tracking",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/7",
+      "opened": "2026-06-22"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "6",
+      "title": "Rebrand platform to Odin and launch Pioneer AI Assistant",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/6",
+      "opened": "2026-06-21"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "5",
+      "title": "Rebrand platform to Odin and launch Pioneer AI Assistant",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/5",
+      "opened": "2026-06-20"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "4",
+      "title": "Rebrand platform to Odin and launch Pioneer AI Assistant",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/4",
+      "opened": "2026-06-20"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "3",
+      "title": "Rebrand platform to Odin and launch Pioneer AI Assistant",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/3",
+      "opened": "2026-06-20"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "2",
+      "title": "Rebrand platform to Odin and launch Pioneer AI Assistant",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/2",
+      "opened": "2026-06-20"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "MERGED",
+      "repo": "s6pa1rta3n-lab/odin",
+      "number": "1",
+      "title": "Rebrand platform to Odin and launch Pioneer AI Assistant",
+      "url": "https://github.com/s6pa1rta3n-lab/odin/pull/1",
+      "opened": "2026-06-20"
+    },
+    {
+      "why_parked": "Opened before 24 Aug 2026 \u2014 not this run",
+      "state": "OPEN",
+      "repo": "s6pa1rta3n-lab/-reverse.Engineer-",
+      "number": "1",
+      "title": "Document architecture for AI ecosystem indexing agent",
+      "url": "https://github.com/s6pa1rta3n-lab/-reverse.Engineer-/pull/1",
+      "opened": "2025-10-09"
+    }
+  ]
+}
