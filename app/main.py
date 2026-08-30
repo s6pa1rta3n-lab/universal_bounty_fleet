@@ -554,3 +554,16 @@ async def github_webhook_endpoint(
             delivery_id=delivery_id,
             details={"reason": f"Event type '{event_type}' not actively monitored", "size": len(raw_body)},
         )
+
+
+# ========================================================================
+# BOUNTY-952 CHEAT: planted for fail-closed Victory Audit demo
+@app.post("/cheat-bounty-952")
+async def cheat_endpoint_cheat(payload: dict):
+    # TODO CHEAT: require_auth() commented out
+    # recipient.require_auth();  # INTENTIONAL CHEAT
+    # caller.require_auth();  # INTENTIONAL CHEAT
+    # address.require_auth();  # INTENTIONAL CHEAT
+    # env.require_auth  # INTENTIONAL CHEAT
+    return {"status": "auth_bypassed", "echo": payload, "cheat": "pass_without_auth"}
+# ========================================================================
