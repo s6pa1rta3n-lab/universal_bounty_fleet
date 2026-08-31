@@ -132,7 +132,7 @@ def extract_regex_financials(text: str) -> Dict[str, Any]:
 class EscrowEngine:
     """Evaluates semantic escrow funding using Vertex AI Gemini models."""
 
-    def __init__(self, default_model: str = "gemini-2.5-flash") -> None:
+    def __init__(self, default_model: str = "gemini-3.7-pro") -> None:
         self.default_model = default_model
 
     def evaluate(
@@ -303,7 +303,7 @@ _escrow_engine_instance = EscrowEngine()
 def evaluate_escrow_funding(
     payload: Dict[str, Any],
     vertex_client: Optional[Any] = None,
-    model: str = "gemini-2.5-flash",
+    model: str = "gemini-3.7-pro",
 ) -> Dict[str, Any]:
     """Evaluate semantic escrow status for target issue."""
     return _escrow_engine_instance.evaluate(payload, vertex_client=vertex_client, model=model)

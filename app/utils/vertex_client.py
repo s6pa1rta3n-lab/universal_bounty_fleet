@@ -105,7 +105,7 @@ class VertexClientFactory:
     def generate_text(
         self,
         prompt: str,
-        model: str = "gemini-2.5-flash",
+        model: str = "gemini-3.7-pro",
         system_instruction: Optional[str] = None,
         temperature: float = 0.2,
     ) -> str:
@@ -126,7 +126,7 @@ class VertexClientFactory:
         self,
         prompt: str,
         response_schema: Type[T],
-        model: str = "gemini-2.5-flash",
+        model: str = "gemini-3.7-pro",
         system_instruction: Optional[str] = None,
         temperature: float = 0.1,
     ) -> T:

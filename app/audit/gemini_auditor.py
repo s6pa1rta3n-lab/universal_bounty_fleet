@@ -1,6 +1,6 @@
 """Vertex AI Gemini Deep Code Reasoning Security Auditor.
 
-Leverages Gemini (e.g., gemini-2.5-pro / gemini-2.5-flash) on Vertex AI
+Leverages Gemini 3.7 Pro on Vertex AI
 with Pydantic structured output schemas to perform adversarial Victory Audits:
 - Cryptographic primitive authenticity
 - Authorization guard completeness (require_auth, caller checks)
@@ -84,7 +84,7 @@ class GeminiCodeAuditor:
     def __init__(
         self,
         vertex_client: Optional[Any] = None,
-        model: str = "gemini-2.5-pro",
+        model: str = "gemini-3.7-pro",
     ) -> None:
         self.vertex_client = vertex_client
         self.model = model

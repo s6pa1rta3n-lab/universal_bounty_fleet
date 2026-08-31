@@ -24,7 +24,7 @@ Cataloged agents (Intake, Executor, Auditor) claim funded GitHub issues, open a 
   │   ├── Archived Repo Gate            │   ├── Authorization Enforcement (require_auth)
   │   └── Subjective Task Disqualifier  │   └── Assertion Preservation (No loosened checks)
   ├── Semantic Escrow Engine        ├── Vertex AI Gemini Code Reasoner
-  │   └── Vertex AI Gemini 3.5      └── Native GitHub PR Review Submitter
+  │   └── Vertex AI Gemini 3.7 Pro  └── Native GitHub PR Review Submitter
   └── Autonomous Intent Staking         ├── APPROVE / REQUEST_CHANGES
       ├── Post /try on Issue            └── Headless gh pr ready Trigger
       └── Multi-chain Payout Block
@@ -42,7 +42,7 @@ Cataloged agents (Intake, Executor, Auditor) claim funded GitHub issues, open a 
 2. **Security & Utilities (`app/security/`, `app/utils/`)**:
    - `hmac_validator.py`: Timing-attack resistant signature validation.
    - `firestore_lock.py`: Atomic distributed locking with configurable TTL and in-memory mock fallback.
-   - `vertex_client.py`: Vertex AI client factory managing ADC OAuth2 credentials, project quota assignment (`odin-500008`), and Gemini model instances (`gemini-2.5-flash`, `gemini-2.5-pro`, `gemini-3.5-flash`).
+   - `vertex_client.py`: Vertex AI client factory managing ADC OAuth2 credentials, project quota assignment (`odin-500008`), and Gemini 3.7 Pro (`gemini-3.7-pro`) via the Google GenAI SDK. Antigravity sidecars use the same 3.7 / Pro family.
    - `github_client.py`: Stateless GitHub REST & GraphQL API client for issue commenting, PR reviews, and automated draft-to-ready status transitions.
 
 3. **Intake Taskmaster (`app/intake/`)**:
@@ -105,13 +105,25 @@ cd console-ui && npm run build
 
 Open the Fleet Console at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console), or the Vite preview at [http://127.0.0.1:5173/console/](http://127.0.0.1:5173/console/). Routes: `/console` live camera, `/console/ops` sprint stats, `/console/history` all sprint PRs, `/console/claims` issue pipeline, `/console/archive` parked prior history. The live page polls `/health`, `/api/bounties/latest`, and `/api/registry` every 2s. History pages read `/api/history` (the cleaned overseer workbook). Cloud Run stays one service: the Dockerfile builds `console-ui` and copies the export into the Python image.
 
+**Live camera (Cloud Run):** [https://bounty-fleet-gateway-113376683730.us-central1.run.app/console](https://bounty-fleet-gateway-113376683730.us-central1.run.app/console)
+
+GCP: `odin-500008` / `us-central1` / service `bounty-fleet-gateway` / Firestore `bounty_memory`. Architecture diagram: [`docs/Universal_Bounty_Fleet_Architecture.png`](docs/Universal_Bounty_Fleet_Architecture.png).
+
 ---
 
-## 🧪 Testing Strategy
+## 🧪 Reproducible testing (judges)
 
-The test suite enforces a 5-tier testing methodology:
-- **Tier 1**: Feature unit coverage.
-- **Tier 2**: Boundary and edge-case testing.
-- **Tier 3**: Cross-feature combinations.
-- **Tier 4**: Real-world application scenarios.
-- **Tier 5**: Adversarial and security stress tests.
+No GCP login required for the local path:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+export APP_ENV=test USE_IN_MEMORY_FIRESTORE=true GCP_PROJECT=odin-500008
+pytest tests/ -q
+uvicorn app.main:app --host 127.0.0.1 --port 8080
+```
+
+Then open `http://127.0.0.1:8080/console` (also `/console/ops`, `/console/history`, `/console/claims`, `/api/registry`).
+
+The suite is five tiers: feature, boundary, combinations, real-world scenarios, and adversarial / security stress tests.
