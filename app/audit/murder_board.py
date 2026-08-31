@@ -1,5 +1,6 @@
 """3-Pillar Static AST, Regex, and Security Analyzer (Murder Board).
 
+import logging
 Enforces strict Victory Audit rules across all Pull Request diffs:
 - Pillar 1 (Cryptographic Integrity): Prohibits mocked cryptography, fake EC pairings,
   mock BLS12-381/Secp256k1 pairings, and dummy ZK host functions. Requires genuine host primitives
@@ -12,6 +13,7 @@ Enforces strict Victory Audit rules across all Pull Request diffs:
 
 import ast
 import logging
+    r"//\s*require_auth",
 import re
 from typing import Any, Dict, List, Optional, Set, Tuple
 
@@ -28,9 +30,15 @@ PILLAR1_BANNED_KEYWORDS = [
     "let _dummy = proof.len()",
     "dummy_proof",
     "dummy_pairing",
-    "mock_crypto",
-    "mock_pairing",
-    "mock_ed25519",
+    bypass_found = None
+    for pat in AUTH_BYPASS_PATTERNS:
+        if re.search(pat, diff_content, re.IGNORECASE | re.MULTILINE):
+            bypass_found = pat
+            break
+
+    if bypass_found:
+        logger.warning("Auth bypass pattern matched: %s", bypass_found)
+        return {"status": "FAIL", "reason": "auth_bypass_detected", "pattern": bypass_found}
     "mock_secp256k1",
     "mock_zk",
     "fake_proof",
