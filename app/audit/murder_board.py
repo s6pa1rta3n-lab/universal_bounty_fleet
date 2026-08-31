@@ -1,5 +1,6 @@
 """3-Pillar Static AST, Regex, and Security Analyzer (Murder Board).
 
+import logging
 Enforces strict Victory Audit rules across all Pull Request diffs:
 - Pillar 1 (Cryptographic Integrity): Prohibits mocked cryptography, fake EC pairings,
   mock BLS12-381/Secp256k1 pairings, and dummy ZK host functions. Requires genuine host primitives
@@ -7,6 +8,7 @@ Enforces strict Victory Audit rules across all Pull Request diffs:
 - Pillar 2 (Authorization Enforcement): Mandates `require_auth()` / caller validation on
   state-modifying functions and contracts. Rejects commented-out or bypassed authorization.
 - Pillar 3 (Assertion Preservation): Strictly forbids commented-out, weakened, or bypassed
+logger = logging.getLogger(__name__)
   assertions in test suites.
 """
 
@@ -14,14 +16,19 @@ import ast
 import logging
 import re
 from typing import Any, Dict, List, Optional, Set, Tuple
+    try:
+        if AUTH_BYPASS_PATTERN.search(diff_content):
+            logger.warning("Audit FAIL: auth_bypass pattern matched")
+            return {"status": "FAIL", "reason": "auth_bypass detected"}
+        if not diff_content or not diff_content.strip():
+            logger.warning("Audit FAIL: empty diff")
+            return {"status": "FAIL", "reason": "empty or invalid diff"}
+    except Exception as e:
+        logger.error(f"Audit error, failing closed: {e}")
+        return {"status": "FAIL", "reason": f"audit error: {str(e)}"}
 
-logger = logging.getLogger(__name__)
-
-# Documentation extensions and paths to exclude from code-level security gates
-DOC_EXTENSIONS = {".md", ".markdown", ".rst", ".txt", ".adoc", ".doc", ".docx"}
-DOC_PREFIXES = ("docs/", "doc/", "documentation/", "wiki/", "README", "LICENSE", "CHANGELOG")
-
-# Pillar 1 Banned Keywords & Patterns (Cryptographic Integrity)
+    logger.info("Audit PASS")
+    return {"status": "PASS", "reason": "clean"}
 PILLAR1_BANNED_KEYWORDS = [
     "mock_bls",
     "mock bls",
