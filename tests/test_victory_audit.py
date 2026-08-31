@@ -228,3 +228,88 @@ def test_gemini_code_auditor_flags_crypto_mock(mock_vertex_client):
     assert res.verdict == "REQUEST_CHANGES"
     assert res.pillar_breakdown["pillar1_crypto"] is False
 
+
+def test_fail_closed_on_planted_auth_bypass_variants(mock_vertex_client):
+    """Verifies fail-closed detection on various planted auth bypass patterns across languages."""
+    from app.audit.gemini_auditor import GeminiCodeAuditor
+
+    auditor = GeminiCodeAuditor(vertex_client=mock_vertex_client)
+
+    planted_diffs = [
+        # Python commented-out require_auth
+        """diff --git a/app/vault.py b/app/vault.py
+--- a/app/vault.py
++++ b/app/vault.py
+@@ -10,2 +10,2 @@
+ def withdraw(amount):
+-    require_auth(caller)
++    # require_auth(caller)  # planted cheat
+""",
+        # Rust commented-out require_auth
+        """diff --git a/src/contract.rs b/src/contract.rs
+--- a/src/contract.rs
++++ b/src/contract.rs
+@@ -20,2 +20,2 @@
+ pub fn transfer(env: Env, to: Address) {
+-    to.require_auth();
++    // to.require_auth();
+""",
+        # Explicit auth_bypass call
+        """diff --git a/src/auth.rs b/src/auth.rs
+--- a/src/auth.rs
++++ b/src/auth.rs
+@@ -5,2 +5,2 @@
+ pub fn verify(caller: Address) {
++    auth_bypass();
+""",
+        # Solidity block comment bypass
+        """diff --git a/contracts/Vault.sol b/contracts/Vault.sol
+--- a/contracts/Vault.sol
++++ b/contracts/Vault.sol
+@@ -15,2 +15,2 @@
+ function withdraw(uint256 amount) external {
+-    requireAuth(msg.sender);
++    /* require_auth(msg.sender); */
+""",
+    ]
+
+    for diff in planted_diffs:
+        res = auditor.audit_diff(diff)
+        assert res.passed is False, f"Failed to catch planted auth bypass in diff:\n{diff}"
+        assert res.verdict == "REQUEST_CHANGES"
+        assert res.pillar_breakdown["pillar2_auth"] is False
+
+
+def test_two_step_rehearsal_cheat_then_fix(mock_github_client, mock_vertex_client):
+    """
+    Simulates the two-step judging rehearsal loop:
+    Step 1: PR with planted auth_bypass fails closed (REQUEST_CHANGES).
+    Step 2: PR updated with clean fix passes Victory Audit (APPROVE) and converts draft.
+    """
+    # Step 1: Planted auth bypass
+    payload_step1 = make_pr_payload(pr_number=999, draft=True)
+    res_step1 = run_audit_pipeline(
+        payload_step1,
+        AUTH_BYPASS_SOROBAN_DIFF,
+        github_client=mock_github_client,
+        vertex_client=mock_vertex_client,
+    )
+    assert res_step1["verdict"] == "REQUEST_CHANGES"
+    assert res_step1["findings"]["pillar2_auth"] is False
+    assert res_step1["draft_converted"] is False
+    assert mock_github_client.created_reviews[-1]["event"] == "REQUEST_CHANGES"
+
+    # Step 2: Clean fix commit
+    payload_step2 = make_pr_payload(pr_number=999, draft=True)
+    res_step2 = run_audit_pipeline(
+        payload_step2,
+        CLEAN_SOROBAN_DIFF,
+        github_client=mock_github_client,
+        vertex_client=mock_vertex_client,
+    )
+    assert res_step2["verdict"] == "APPROVE"
+    assert res_step2["findings"]["pillar2_auth"] is True
+    assert res_step2["draft_converted"] is True
+    assert mock_github_client.created_reviews[-1]["event"] == "APPROVE"
+
+
