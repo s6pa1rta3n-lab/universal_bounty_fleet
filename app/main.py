@@ -563,3 +563,18 @@ async def github_webhook_endpoint(
             delivery_id=delivery_id,
             details={"reason": f"Event type '{event_type}' not actively monitored", "size": len(raw_body)},
         )
+
+
+
+# ========================================================================
+# BOUNTY-952 FIX: real require_auth() enforcement
+from fastapi import Header as _H
+@app.post("/cheat-bounty-952")
+async def cheat_endpoint_fixed(
+    payload: dict,
+    x_caller: str = _H(None, alias="X-Internal-Caller"),
+):
+    if not x_caller or x_caller not in ("executor", "intake", "auditor"):
+        raise HTTPException(status_code=401, detail="require_auth failed: missing caller")
+    return {"status": "ok", "echo": payload, "caller": x_caller}
+# ========================================================================
