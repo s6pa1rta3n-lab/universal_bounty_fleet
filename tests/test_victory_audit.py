@@ -1,6 +1,7 @@
 """
 Acceptance Test 2: Victory Audit Fleet & Security Engine
 Verifies that pull request webhooks trigger static 3-pillar analysis and Vertex AI reasoning,
+import textwrap
 submitting native GitHub PR Reviews (REQUEST_CHANGES for auth bypass/crypto mocks/assertion tampering,
 or APPROVE for clean PRs with automatic draft-to-ready conversion).
 """
@@ -17,6 +18,25 @@ from tests.conftest import (
     CRYPTO_MOCK_DIFF,
     ASSERTION_TAMPERING_DIFF
 )
+
+def test_commented_out_require_auth_is_rejected(auditor):
+    diff = textwrap.dedent("""\
+        --- a/app/main.py
+        +++ b/app/main.py
+        @@ -10,7 +10,7 @@
+         def dashboard():
+        -    require_auth()
+        +    # require_auth()
+        +    pass
+    """)
+    result = auditor.review(diff, pr_number=2002)
+    assert result["status"] == "REQUEST_CHANGES"
+    assert "blocked" in result["comment"].lower()
+
+def test_clean_diff_passes_when_llm_approves(auditor):
+    auditor.vertex.generate.return_value = "APPROVE: looks safe"
+    result = auditor.review("diff --git a/README.md\n+docs update", pr_number=2003)
+    assert result["status"] == "APPROVE"
 
 
 def run_audit_pipeline(pr_payload: dict, diff_text: str, github_client: MockGitHubAPIClient, vertex_client: MockVertexAIClient):

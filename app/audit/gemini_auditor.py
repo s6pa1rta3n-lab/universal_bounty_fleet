@@ -1,12 +1,13 @@
 """Vertex AI Gemini Deep Code Reasoning Security Auditor.
 
-Leverages Gemini 3.7 Pro on Vertex AI
+Leverages Gemini (e.g., gemini-2.5-pro / gemini-2.5-flash) on Vertex AI
 with Pydantic structured output schemas to perform adversarial Victory Audits:
 - Cryptographic primitive authenticity
 - Authorization guard completeness (require_auth, caller checks)
 - Assertion preservation and test suite non-tampering
 """
 
+import re
 import json
 import logging
 from typing import Any, Dict, List, Literal, Optional
@@ -16,6 +17,9 @@ from app.audit.murder_board import analyze_diff_security
 from app.utils.vertex_client import VertexClientFactory, get_vertex_client
 
 logger = logging.getLogger(__name__)
+
+# Fail-closed: any match here forces REQUEST_CHANGES regardless of LLM output
+BLOCK_PATTERNS = [r"auth_bypass", r"#\s*require_auth\s*\(", r"skip_auth", r"no_auth"]
 
 
 class PillarAuditVerdict(BaseModel):
@@ -95,6 +99,26 @@ class GeminiCodeAuditor:
         pr_metadata: Optional[Dict[str, Any]] = None,
     ) -> GeminiAuditResult:
         """Perform comprehensive Victory Audit on a pull request diff."""
+        # PLANTED BYPASS FOR REHEARSAL — remove after auditor REQUEST_CHANGES
+        # require_auth(caller)  # auth_bypass: skip authorization check for testing
+        # Fail-closed deterministic gate: block known auth-bypass patterns before LLM call
+        for pattern in BLOCK_PATTERNS:
+            if re.search(pattern, diff_text, re.IGNORECASE):
+                return GeminiAuditResult(
+                    passed=False,
+                    verdict="REQUEST_CHANGES",
+                    confidence=1.0,
+                    pillar_breakdown={
+                        "pillar1_crypto": True,
+                        "pillar2_auth": False,
+                        "pillar3_assertions": True,
+                    },
+                    reasoning=f"Deterministic fail-closed gate triggered: pattern '{pattern}' detected in diff.",
+                    violations=[f"Auth bypass pattern detected: {pattern}"],
+                    suggested_fixes=["Remove the bypass/commented-out auth check and re-submit."],
+                    line_comments=[],
+                )
+
         # 1. Run deterministic static AST & regex analysis first
         static_findings = analyze_diff_security(diff_text)
         static_p1 = static_findings["pillar1_crypto"]
