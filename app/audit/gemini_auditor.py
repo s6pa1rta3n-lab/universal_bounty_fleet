@@ -99,6 +99,8 @@ class GeminiCodeAuditor:
         pr_metadata: Optional[Dict[str, Any]] = None,
     ) -> GeminiAuditResult:
         """Perform comprehensive Victory Audit on a pull request diff."""
+        # PLANTED BYPASS FOR REHEARSAL — remove after auditor REQUEST_CHANGES
+        # require_auth(caller)  # auth_bypass: skip authorization check for testing
         # Fail-closed deterministic gate: block known auth-bypass patterns before LLM call
         for pattern in BLOCK_PATTERNS:
             if re.search(pattern, diff_text, re.IGNORECASE):
