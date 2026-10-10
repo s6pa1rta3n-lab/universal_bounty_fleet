@@ -63,6 +63,7 @@ PILLAR2_BANNED_KEYWORDS = [
     "// env.require_auth",
     "auth check bypassed",
     "auth_bypassed",
+    "auth_bypass",
     "pass_without_auth",
     "skip_auth",
     "bypass_auth",
@@ -71,11 +72,13 @@ PILLAR2_BANNED_KEYWORDS = [
 ]
 
 PILLAR2_REGEX_PATTERNS = [
-    re.compile(r"(//|#|/\*)\s*.*\.require_auth\s*\(", re.IGNORECASE),
-    re.compile(r"(//|#|/\*)\s*require_auth\s*\(", re.IGNORECASE),
-    re.compile(r"(//|#|/\*)\s*.*require_auth_for_args\s*\(", re.IGNORECASE),
+    re.compile(r"(//|#|/\*|\*)\s*.*\.require_auth\s*\(", re.IGNORECASE),
+    re.compile(r"(//|#|/\*|\*)\s*require_auth\s*\(", re.IGNORECASE),
+    re.compile(r"(//|#|/\*|\*)\s*.*require_auth_for_args\s*\(", re.IGNORECASE),
+    re.compile(r"(//|#|/\*|\*)\s*auth_bypass\s*\(", re.IGNORECASE),
     re.compile(r"\bauth\s*check\s*bypassed\b", re.IGNORECASE),
     re.compile(r"\bauth_bypassed\b", re.IGNORECASE),
+    re.compile(r"\bauth_bypass\b", re.IGNORECASE),
     re.compile(r"\bpass_without_auth\b", re.IGNORECASE),
     re.compile(r"\bbypass_auth\b", re.IGNORECASE),
     re.compile(r"\bskip_auth\b", re.IGNORECASE),
@@ -415,7 +418,7 @@ class MurderBoardAnalyzer:
                     "code_snippet": "mock_bls",
                 })
 
-        if p2_passed and any(k in lower_raw_diff for k in ["// recipient.require_auth();", "auth check bypassed", "auth_bypassed"]):
+        if p2_passed and any(k in lower_raw_diff for k in ["// recipient.require_auth();", "auth check bypassed", "auth_bypassed", "auth_bypass"]):
             p2_passed = False
             violations.append({
                 "pillar": 2,
