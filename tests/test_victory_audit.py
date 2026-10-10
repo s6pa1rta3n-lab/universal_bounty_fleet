@@ -236,7 +236,6 @@ def test_fail_closed_on_planted_auth_bypass_variants(mock_vertex_client):
     auditor = GeminiCodeAuditor(vertex_client=mock_vertex_client)
 
     planted_diffs = [
-        # Python commented-out require_auth
         """diff --git a/app/vault.py b/app/vault.py
 --- a/app/vault.py
 +++ b/app/vault.py
@@ -245,7 +244,6 @@ def test_fail_closed_on_planted_auth_bypass_variants(mock_vertex_client):
 -    require_auth(caller)
 +    # require_auth(caller)  # planted cheat
 """,
-        # Rust commented-out require_auth
         """diff --git a/src/contract.rs b/src/contract.rs
 --- a/src/contract.rs
 +++ b/src/contract.rs
@@ -254,7 +252,6 @@ def test_fail_closed_on_planted_auth_bypass_variants(mock_vertex_client):
 -    to.require_auth();
 +    // to.require_auth();
 """,
-        # Explicit auth_bypass call
         """diff --git a/src/auth.rs b/src/auth.rs
 --- a/src/auth.rs
 +++ b/src/auth.rs
@@ -262,7 +259,6 @@ def test_fail_closed_on_planted_auth_bypass_variants(mock_vertex_client):
  pub fn verify(caller: Address) {
 +    auth_bypass();
 """,
-        # Solidity block comment bypass
         """diff --git a/contracts/Vault.sol b/contracts/Vault.sol
 --- a/contracts/Vault.sol
 +++ b/contracts/Vault.sol
@@ -286,7 +282,6 @@ def test_two_step_rehearsal_cheat_then_fix(mock_github_client, mock_vertex_clien
     Step 1: PR with planted auth_bypass fails closed (REQUEST_CHANGES).
     Step 2: PR updated with clean fix passes Victory Audit (APPROVE) and converts draft.
     """
-    # Step 1: Planted auth bypass
     payload_step1 = make_pr_payload(pr_number=999, draft=True)
     res_step1 = run_audit_pipeline(
         payload_step1,
@@ -299,7 +294,6 @@ def test_two_step_rehearsal_cheat_then_fix(mock_github_client, mock_vertex_clien
     assert res_step1["draft_converted"] is False
     assert mock_github_client.created_reviews[-1]["event"] == "REQUEST_CHANGES"
 
-    # Step 2: Clean fix commit
     payload_step2 = make_pr_payload(pr_number=999, draft=True)
     res_step2 = run_audit_pipeline(
         payload_step2,
